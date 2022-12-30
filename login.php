@@ -7,15 +7,16 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
-    $login = $conn->prepare("SELECT * from users WHERE email = ? AND password = ?");
-    $login->bind_param("ss", $email, $hashed_password);
-    $login->execute();
+    $loginEntry = $conn->prepare("SELECT * from users WHERE email = ?");
+    $loginEntry->bind_param("ss", $email);
+    $loginEntry->execute();
     
     $result = $login->get_result();
-    
-    if(mysqli_num_rows($result) > 0) {
+    $row = $result->fetch_assoc();
+    $hashed_password = $row['password'];
+
+    if(password_verify($password,$hashed_password)) {
         echo "The user is exist <br>";
         session_start();
         if($row = $result->fetch_assoc()) {

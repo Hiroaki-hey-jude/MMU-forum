@@ -6,7 +6,7 @@
         <title>Register Form</title>
 
         <!-- css file -->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
         <div class="form-container">

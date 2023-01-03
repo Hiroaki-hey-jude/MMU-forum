@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
         echo "Email: " . $row['email'] . "<br>";
         echo "Password : " . $row['password'] . "<br>";
         echo "<h2> Here will show homepage with logged in details and established session</h2>";
-        $_SESSION['userid'] = $row['id'];
+        $_SESSION['user'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['userrole'] = 'user';

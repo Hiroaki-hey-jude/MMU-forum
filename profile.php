@@ -14,7 +14,7 @@
             <h1>Profile</h1>
             <img src="images/c++.png" class="rounded-profile-image" style="width:150px; object-fit:cover">
         </div>
-        <form action="profile_edit.php" method="post" enctype="multipart/form-data">
+        <form action="edit_profile.php" method="post" enctype="multipart/form-data">
             <div class="input-box">
                 <label for="username" style="font-size: 1.2em;">User Name</label>
                 <!-- placeholder will be the user's infomation -->

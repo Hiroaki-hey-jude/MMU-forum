@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
             <input type="email" name="email" required placeholder="enter your email">
             <input type="password" name="password" required placeholder="enter your password">
             <input type="submit" name = "submit" value="Login now" class="reg-button">
-            <p>don't have an account? <a href="register_form.php">register now</a></p>
+            <p>don't have an account? <a href="register.php">register now</a></p>
             <?php
                 if(isset($_GET['error']) && $_GET['error'] == 'invalidUser') {
                 echo "<div class = 'login-failed'>Log in failed. Please check your email or password</div>";

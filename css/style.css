@@ -126,12 +126,16 @@
 }
 
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 500px) {
     .form-container {
         width: 300px;
     }
 
     .form-container form {
+        margin: 0px;
+    }
+
+    .wrapper .edit-profile {
         margin: 0px;
     }
 }

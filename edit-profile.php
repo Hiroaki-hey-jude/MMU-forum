@@ -5,26 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="edit-profile-body">
     <div class="wrapper">
-        <h2>Edit Profile</h2>
+        <div class="edit-profile">
+        <div class="profile-image">
+            <h1>Profile</h1>
+            <img src="images/c++.png" class="rounded-profile-image" style="width:150px; object-fit:cover">
+        </div>
         <form action="" method="post">
             <div class="input-box">
-                <label for="username">User Name</label>
-                <input type="text" name="username">
+                <label for="username" style="font-size: 1.2em;">User Name</label>
+                <!-- placeholder will be the user's infomation -->
+                <input type="text" name="username" placeholder="HiroakiUeda"> 
             </div>
             <div class="input-box">
-                <label for="email">Email</label>
-                <input type="email" name="email">
+                <label for="email" style="font-size: 1.2em;">Email Address</label>
+                <!-- placeholder will be the user's infomation -->
+                <input type="email" name="email" placeholder="1191302145@student.mmu.edu">
             </div>
             <div class="input-box">
-                <label for="photo">profile picture</label>
+                <label for="photo" style="font-size: 1.2em;">Profile Picture</label>
                 <input type="file" name="photo">
             </div>
-            <input type="submit" accept="images/*" name="submit" class="edit-profile-button">
+            <input type="submit" value="update profile" accept="images/*" name="submit" class="edit-profile-button">
         </form>
+        </div>
     </div>
 </body>
 </html>

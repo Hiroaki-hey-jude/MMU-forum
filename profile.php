@@ -20,7 +20,7 @@
         <div class="edit-profile">
         <div class="profile-image">
             <h1>Profile</h1>
-            <img src="images/c++.png" class="rounded-profile-image" style="width:150px; object-fit:cover">
+	    <img src="images/<?php echo $user['profile_pic_name']; ?>" class="rounded-profile-image" style="width:150px; object-fit:cover">
         </div>
         <form action="edit_profile.php" method="post" enctype="multipart/form-data">
             <div class="input-box">
@@ -48,9 +48,9 @@
             <div class="input-box">
                 <label for="password1" style="font-size: 1.2em;">Current Password</label>
                 <!-- placeholder will be the user's infomation -->
-                <input type="password" name="password" placeholder="Enter current password to confirm">
+                <input type="password" name="curr_password" placeholder="Enter current password to confirm">
             </div>
-            <input type="submit" value="update profile" accept="images/*" name="submit" class="edit-profile-button">
+            <input type="submit" value="update profile" accept="images/*" name="edit" class="edit-profile-button">
         </form>
         </div>
     </div>

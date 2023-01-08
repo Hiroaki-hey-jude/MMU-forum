@@ -45,7 +45,7 @@ if(isset($_POST['edit'])){
 		}
 		else{
 			if($password1 != $password2) {
-				array_push($errors, "The two passwords do not match");
+				array_push($errors, "The two passwords do not match, your password is not changed!");
 			}
 			$new_password = password_hash($password1, PASSWORD_DEFAULT);
 		}

@@ -29,7 +29,7 @@
             </div>
             <div class="input-box">
                 <label for="email" style="font-size: 1.2em;">Email Address</label>
-		<input type="email" name="email" value="<?php echo $user['email'] ?>">
+		<input type="email" name="email" value="<?php echo $user['email'] ?>" disabled>
             </div>
             <div class="input-box">
                 <label for="password1" style="font-size: 1.2em;">New Password</label>

@@ -32,7 +32,7 @@ if(isset($_POST['edit'])){
 			$filename = $user['profile_pic_name'];
 		}
 
-		if(empty($password1) && empty($password2){
+		if(empty($password1) && empty($password2)){
 			$password = $user['user_pass'];
 		}
 		else{

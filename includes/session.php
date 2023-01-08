@@ -19,6 +19,6 @@
 			echo "There is some problem in connection: " . $e->getMessage();
 		}
 
-		mysqli_close($conn);
+		//mysqli_close($conn);
 	}
 ?>

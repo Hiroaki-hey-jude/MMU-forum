@@ -6,7 +6,8 @@ $errors = array();
 if(isset($_POST['edit'])){
 	$curr_password = $_POST['curr_password'];
    	//$email = $_POST['email'];
- 	$password = $_POST['password'];
+ 	$password1 = $_POST['password1'];
+ 	$password2 = $_POST['password2'];
 	$username = $_POST['username'];
 	$photo = $_FILES['photo']['name'];
 	
@@ -31,11 +32,14 @@ if(isset($_POST['edit'])){
 			$filename = $user['profile_pic_name'];
 		}
 
-		if(empty($password)){
+		if(empty($password1) && empty($password2){
 			$password = $user['user_pass'];
 		}
 		else{
-			$password = password_hash($password, PASSWORD_DEFAULT);
+			if($password1 != $password2) {
+				array_push($errors, "The two passwords do not match");
+			}
+			$password = password_hash($password1, PASSWORD_DEFAULT);
 		}
 	}
 	else {

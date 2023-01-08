@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
         }
 
         // check duplicate entry
-        $email_check_query = $conn->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
+        $email_check_query = $conn->prepare("SELECT * FROM user WHERE email = ? LIMIT 1");
         $email_check_query->bind_param("s", $email);
         $email_check_query->execute();
 
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
         // if no error
         if (count($errors) == 0) {
                 $hashed_password = password_hash($password1, PASSWORD_DEFAULT);
-                $stmt = $conn->prepare("insert into users (username, email, password) values (?,?,?)");
+                $stmt = $conn->prepare("insert into user (username, email, user_pass) values (?,?,?)");
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
                 $stmt->execute();
                 header('location: login.php');

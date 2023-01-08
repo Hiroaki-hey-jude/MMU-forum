@@ -9,7 +9,7 @@
 
 	if(isset($_SESSION['user'])) {
 		try{
-			$stmt = $conn->prepare("SELECT * FROM users WHERE id= ?");
+			$stmt = $conn->prepare("SELECT * FROM user WHERE user_id= ?");
 			$stmt->bind_param("i", $_SESSION['user']);
 			$stmt->execute();
 

@@ -11,7 +11,7 @@ $user['id'] = $_SESSION['user_id'];
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     user_pass VARCHAR(255) NOT NULL,
-    profile_pic_name VARCHAR(255) DEFAULT 'filename',
+    profile_pic_name VARCHAR(255) DEFAULT 'default.png',
     number_of_posts INT(6) UNSIGNED DEFAULT 0,
     number_of_comments INT(6) UNSIGNED DEFAULT 0
     )";

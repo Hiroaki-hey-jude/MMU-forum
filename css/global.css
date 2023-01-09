@@ -1,0 +1,49 @@
+@import "theme.css";
+
+.primary-text {
+  color: var(--primary-color);
+}
+
+.primary-background {
+  background-color: var(--primary-color);
+}
+
+.post-item {
+  text-decoration: none;
+  color: black;
+  border: 1px solid lightgray;
+}
+
+.post-action {
+  text-align: center;
+}
+
+.post-action-icon {
+  color: gray;
+  margin: 0 0.5em 0;
+  text-align: center;
+}
+
+.list-item-title {
+  margin: 0.5em;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.list-item-subtitle {
+  margin: 0.5em;
+  display: flex;
+  align-items: center;
+}
+
+.post-list {
+  border: 1px solid var(--primary-color);
+  margin: 1em;
+}
+
+.list-title {
+  padding: 0.5em;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}

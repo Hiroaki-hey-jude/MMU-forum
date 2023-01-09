@@ -3,12 +3,14 @@
 
 <head>
     <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/header.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
+    <div class="header-div"></div>
+    <header class="primary-background">
         <a id="header-title" href="home.php">
             <img id="header-image" src="images/MMU.png" height="30px" />
             <span class="header-span"></span>

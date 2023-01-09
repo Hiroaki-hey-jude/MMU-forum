@@ -1,0 +1,18 @@
+@import "theme.css";
+
+#home-container {
+  margin: 0 20em 0 10em;
+}
+
+#left-pane {
+  float: left;
+  width: 10em;
+  background-color: var(--primary-color);
+  height: "100%";
+  position: fixed;
+}
+
+#right-pane {
+  float: right;
+  width: 20em;
+}

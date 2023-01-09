@@ -30,7 +30,7 @@
 
 <body>
     <?php include "components/header.php" ?>
-    <aside id="left-pane"></aside>
+    <?php include "components/sidebar.php" ?>
     <aside id="right-pane"></aside>
     <div id="home-container">
         <?php

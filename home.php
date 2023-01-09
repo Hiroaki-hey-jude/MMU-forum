@@ -2,15 +2,17 @@
 <html>
 
 <?php
-    //  TODO: backend data
+    // TODO: backend data
     $categories[] = array(
+        "c0001",
         "Announcement", 
         array(
-            array("sc01", "Online Week", 3, 10), 
-            array("sc02", "Registration starts", 5, 40)
+            array("sc001", "Online Week", 3, 10), 
+            array("sc002", "Registration starts", 5, 40)
         )
     );
     $categories[] = array(
+        "c0002",
         "FCI", 
         array(
             array("sc003", "No Online Week", 3, 10), 
@@ -18,6 +20,7 @@
         )
     );
     $categories[] = array(
+        "c0003",
         "FCI", 
         []
     );
@@ -43,7 +46,7 @@
         <div class="post-list recent-list">
             <div class="list-title">
                 Recent Posts
-                <a class="view-all" href="recent-posts.php">View All</a>
+                <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
                 foreach($recentPosts as $post){
@@ -62,7 +65,7 @@
         <div class="post-list bookmark-list">
             <div class="list-title bookmark-title">
                 Bookmarked Posts
-                <a class="view-all" href="bookmarked-posts.php">View All</a>
+                <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
                 foreach($bookmarkedPosts as $post){
@@ -85,14 +88,15 @@
                 echo '
                     <div class="post-list">
                         <div class="list-title">
-                            '.$category[0].'
+                            '.$category[1].'
+                            <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
                         </div>
                 ';
 
-                if (empty($category[1])) {
+                if (empty($category[2])) {
                     echo '<div class="list-empty">List is empty.</div>';
                 } else {
-                    foreach($category[1] as $subcategory){
+                    foreach($category[2] as $subcategory){
                         echo '
                             <post-item
                                 type="subcategory"

@@ -8,23 +8,23 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     
     
-    $loginEntry = $conn->prepare("SELECT * from users WHERE email = ?");
+    $loginEntry = $conn->prepare("SELECT * from user WHERE email = ?");
     $loginEntry->bind_param("s", $email);
     $loginEntry->execute();
     
     $result = $loginEntry->get_result();
     $row = $result->fetch_assoc();
-    $hashed_password = $row['password'];
+    $hashed_password = $row['user_pass'];
 
     if(password_verify($password,$hashed_password)) {
         echo "The user is exist <br>";
         session_start();
-        echo "ID: " . $row['id'] . "<br>";
+        echo "ID: " . $row['user_id'] . "<br>";
         echo "Username: " . $row['username'] . "<br>";
         echo "Email: " . $row['email'] . "<br>";
-        echo "Password : " . $row['password'] . "<br>";
+        echo "Password : " . $row['user_pass'] . "<br>";
         echo "<h2> Here will show homepage with logged in details and established session</h2>";
-        $_SESSION['user'] = $row['id'];
+        $_SESSION['user'] = $row['user_id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['email'] = $row['email'];
         $_SESSION['userrole'] = 'user';

@@ -6,6 +6,12 @@
   }
 }
 
+@media screen and (max-width: 850px) {
+  #right-pane {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   #home-container {
     margin-left: 0;
@@ -15,4 +21,18 @@
 #right-pane {
   float: right;
   width: var(--right-width);
+}
+
+.bookmark-list .list-title {
+  background-color: var(--bookmark-color);
+}
+
+.recent-list .list-title {
+  background-color: crimson;
+}
+
+.view-all {
+  font-size: small;
+  text-decoration: none;
+  color: white;
 }

@@ -50,4 +50,19 @@ body {
   color: white;
   font-size: large;
   font-weight: bold;
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-empty {
+  text-align: center;
+  margin: 1em;
+  color: gray;
+}
+
+.post-item .fa-bookmark {
+  color: var(--bookmark-color);
 }

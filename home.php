@@ -2,7 +2,7 @@
 <html>
 
 <?php
-    //  TODO: bacckend data
+    //  TODO: backend data
     $categories[] = array(
         "Announcement", 
         array(
@@ -17,6 +17,14 @@
             array("sc004", "Registration no more", 5, 40)
         )
     );
+    $categories[] = array(
+        "FCI", 
+        []
+    );
+
+    // TODO: backend, cut to first 3 or 5
+    $recentPosts[] = array("p0000", "Announcement", 3, 10, "Lim", "12/12/2022", true);
+    $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
 ?>
 
 <head lang="en">
@@ -31,26 +39,71 @@
 <body>
     <?php include "components/header.php" ?>
     <?php include "components/sidebar.php" ?>
-    <aside id="right-pane"></aside>
+    <aside id="right-pane">
+        <div class="post-list recent-list">
+            <div class="list-title">
+                Recent Posts
+                <a class="view-all" href="recent-posts.php">View All</a>
+            </div>
+            <?php
+                foreach($recentPosts as $post){
+                    echo '
+                        <post-item
+                            type="post"
+                            href="post-details.php?id='.$post[0].'" 
+                            title="'.$post[1].'" 
+                            posts="'.$post[2].'" 
+                            comments="'.$post[3].'" 
+                            pinned="'.$post[4].'" 
+                        />';
+                }
+            ?>
+        </div>
+        <div class="post-list bookmark-list">
+            <div class="list-title bookmark-title">
+                Bookmarked Posts
+                <a class="view-all" href="bookmarked-posts.php">View All</a>
+            </div>
+            <?php
+                foreach($bookmarkedPosts as $post){
+                    echo '
+                        <post-item
+                            type="post"
+                            href="post-details.php?id='.$post[0].'" 
+                            title="'.$post[1].'" 
+                            posts="'.$post[2].'" 
+                            comments="'.$post[3].'" 
+                            pinned="'.$post[4].'" 
+                        />';
+                }
+            ?>
+        </div>
+    </aside>
     <div id="home-container">
         <?php
             foreach ($categories as $category) {
                 echo '
                     <div class="post-list">
-                        <div class="list-title primary-background">
+                        <div class="list-title">
                             '.$category[0].'
                         </div>
                 ';
-                foreach($category[1] as $subcategory){
-                    echo '
-                        <post-item
-                            type="subcategory"
-                            href="post-details.php?id='.$subcategory[0].'" 
-                            title="'.$subcategory[1].'" 
-                            posts="'.$subcategory[2].'" 
-                            comments="'.$subcategory[3].'" 
-                        />';
+
+                if (empty($category[1])) {
+                    echo '<div class="list-empty">List is empty.</div>';
+                } else {
+                    foreach($category[1] as $subcategory){
+                        echo '
+                            <post-item
+                                type="subcategory"
+                                href="post-details.php?id='.$subcategory[0].'" 
+                                title="'.$subcategory[1].'" 
+                                posts="'.$subcategory[2].'" 
+                                comments="'.$subcategory[3].'" 
+                            />';
+                    }
                 }
+                
                 echo '
                     </div>
                 ';

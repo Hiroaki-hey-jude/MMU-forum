@@ -1,0 +1,43 @@
+@import "theme.css";
+
+.sidebar {
+  background-color: white;
+  box-shadow: 0px 0.1px 1px gray;
+  position: fixed;
+  top: var(--header-height);
+  bottom: 0;
+  width: var(--sidebar-width);
+  z-index: 9;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: black;
+}
+
+.sidebar-button {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-button-selected,
+.sidebar-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: indianred;
+}
+
+.sidebar-icon {
+  margin: 1em;
+  text-align: center;
+  width: 1em;
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,61 @@
+.edit-post-container {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.top-h2 {
+    border-bottom:1px solid;
+}
+
+.choose-category {
+    display: flex;
+    position: relative;
+    font-family: Arial;
+}
+
+.category {
+    margin: 5px;
+}
+
+.subcategory {
+    margin: 5px;
+}
+
+select {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    outline: 0;
+    border: 1px solid blue;
+    padding: 4px;
+    border-radius: 9px;
+}
+
+.post-create {
+    height: auto; 
+    min-height: 250px;
+    border: solid 1px;
+    padding: 7px;
+    background-color: white;
+}
+
+.post-submit-button {
+    text-align: right;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+#submit_btn {
+    width: 100px;
+    height: 35px;
+    border-radius: 9px;
+    background-color: rgb(158, 155, 155);
+    color: rgb(240, 233, 233);
+    padding: 4px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.post-create:focus {
+    outline:solid 2px black;
+}

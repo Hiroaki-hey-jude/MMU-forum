@@ -1,3 +1,8 @@
+<?php
+//backend data
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +36,7 @@
         <div class="top-h2">
             <h2>Create a Post</h2>
         </div>
-        <form action="" method="post">
+        <form action="upload/path" method="post">
             <div class="choose-category">
                 <div class="category">
                     <select name="category-names" id="category-names" style="width:200px;">
@@ -53,12 +58,13 @@
                 </div>
             </div>
             <!-- by using contenteditable="true", it it gonna be like textarea but but put images also  -->
-            <p>*Place sentences and images to post!</p>
-            <div class="post-create" id="alt_textarea" contenteditable="true"></div>
-            <div align="right" class="post-submit-button">
+            <p style="font-size: 1.1rem;">*<span style="color:red; font-weight:bold;">WRITE</span> sentences and <span style="color:red; font-weight:bold;">DRAG&DROP</span> images to the box!</p>
+            <div class="post-create" id="create_post_textarea" contenteditable="true"></div>
+            <div align="right" class="post-submit-button" id="text-area">
                 <input type="submit" id="submit_btn" name="submit">
             </div>
         </form>
     </div>
 </body>
+<script src="components/create-post.js"></script>
 </html>

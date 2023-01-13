@@ -14,31 +14,127 @@ $user['id'] = $_SESSION['user_id'];
     profile_pic_name VARCHAR(255) DEFAULT 'default.png',
     number_of_posts INT(6) UNSIGNED DEFAULT 0,
     number_of_comments INT(6) UNSIGNED DEFAULT 0
-    )";
-
-// Trigger to update number of likes
-"CREATE TRIGGER update_number_of_posts_in_user AFTER INSERT ON 
-`post` FOR EACH ROW BEGIN UPDATE `user` SET 
-`number_of_posts` = `number_of_posts` + 1 WHERE `user_id` = `NEW`.`author_id`; END";
-
-"CREATE TRIGGER update_number_of_posts_in_user AFTER DELETE ON 
-`post` FOR EACH ROW BEGIN UPDATE `user` SET 
-`number_of_posts` = `number_of_posts` - 1 WHERE `user_id` = `OLD`.`author_id`; END";
-
-// Trigger to update number of likes
-"CREATE TRIGGER update_number_of_comments_in_user AFTER INSERT ON 
-`comment` FOR EACH ROW BEGIN UPDATE `user` SET 
-`number_of_comments` = `number_of_comments` + 1 WHERE `user_id` = `NEW`.`commenter_id`; END";
-
-"CREATE TRIGGER update_number_of_comments_in_user AFTER DELETE ON 
-`comment` FOR EACH ROW BEGIN UPDATE `user` SET 
-`number_of_comments` = `number_of_comments` - 1 WHERE `user_id` = `OLD`.`commenter_id`; END";
+    );";
 
 // CATEOGRY TABLE
 "CREATE TABLE category (
     category_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(255) NOT NULL
     );";
+
+// SUBCATEGORY TABLE
+"CREATE TABLE subcategory (
+    subcategory_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    subcategory_name VARCHAR(255) NOT NULL,
+    category_id INT(6) UNSIGNED NOT NULL,
+    number_of_posts INT(6) NOT NULL DEFAULT 0,
+    number_of_comments INT(6) NOT NULL DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES category(category_id)
+    );";
+
+// POST TABLE
+"CREATE TABLE post (
+    post_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    author_id INT(6) UNSIGNED NOT NULL,
+    subcategory_id INT(6) UNSIGNED NOT NULL ,
+    post_name VARCHAR(255) NOT NULL,
+    post_description TEXT NOT NULL,
+    image_name VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    number_of_comments INT(6) DEFAULT 0 NOT NULL,
+    number_of_likes INT(6) DEFAULT 0 NOT NULL,
+    FOREIGN KEY (subcategory_id) REFERENCES subcategory(subcategory_id),
+    FOREIGN KEY (author_id) REFERENCES user(user_id)
+    );";
+
+// COMMENT TABLE
+"CREATE TABLE comment (
+    comment_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    commenter_id INT(6) UNSIGNED NOT NULL,
+    post_id INT(6) UNSIGNED NOT NULL,
+    comment_description TEXT NOT NULL,
+    comment_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    number_of_likes INT(6) NOT NULL DEFAULT 0,
+    FOREIGN KEY (commenter_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+    );";
+
+// LIKE TABLE
+"CREATE TABLE `like` (
+    like_id INT(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(6) UNSIGNED NOT NULL,
+    post_id INT(6) UNSIGNED NOT NULL,
+    comment_id INT(6) UNSIGNED,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id),
+    FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
+);";
+
+// Trigger to update number of post
+"CREATE TRIGGER increase_number_of_posts_in_user
+AFTER INSERT ON post FOR EACH ROW
+    UPDATE user SET number_of_posts = number_of_posts + 1 WHERE user_id = NEW.author_id;";
+
+"CREATE TRIGGER decrease_number_of_posts_in_user AFTER DELETE ON 
+`post` FOR EACH ROW UPDATE `user` SET 
+`number_of_posts` = `number_of_posts` - 1 WHERE `user_id` = `OLD`.`author_id`;";
+
+// Trigger to update number of likes
+"CREATE TRIGGER increase_number_of_comments_in_user AFTER INSERT ON 
+`comment` FOR EACH ROW UPDATE `user` SET 
+`number_of_comments` = `number_of_comments` + 1 WHERE `user_id` = `NEW`.`commenter_id`;";
+
+"CREATE TRIGGER decrease_number_of_comments_in_user AFTER DELETE ON 
+`comment` FOR EACH ROW UPDATE `user` SET 
+`number_of_comments` = `number_of_comments` - 1 WHERE `user_id` = `OLD`.`commenter_id`;";
+
+// Trigger to update number of post
+"CREATE TRIGGER increase_number_of_posts_in_subcategory AFTER INSERT ON 
+    post FOR EACH ROW UPDATE subcategory SET 
+    number_of_posts = number_of_posts + 1 WHERE subcategory_id = NEW.subcategory_id;";
+
+"CREATE TRIGGER decrease_number_of_posts_in_subcategory AFTER DELETE ON 
+    `post` FOR EACH ROW UPDATE `subcategory` SET 
+    `number_of_posts` = `number_of_posts` - 1 WHERE `subcategory_id` = `OLD`.`subcategory_id`;";
+
+// Trigger to update number of comments
+"CREATE TRIGGER increase_number_of_comments_in_subcategory AFTER INSERT ON 
+    `comment` FOR EACH ROW UPDATE `subcategory` SET 
+    `number_of_comments` = `number_of_comments` + 1 WHERE `subcategory_id` = 
+    (SELECT `subcategory_id` FROM `post` WHERE `NEW`.`post_id` = `post_id`);";
+
+"CREATE TRIGGER decrease_number_of_comments_in_subcategory AFTER DELETE ON 
+    `comment` FOR EACH ROW UPDATE `subcategory`  SET 
+    `number_of_comments` = `number_of_comments` - 1 WHERE `subcategory_id` = 
+    (SELECT `subcategory_id` FROM `post` WHERE `OLD`.`post_id` = `post_id`);";
+
+// Trigger to update number of comments
+"CREATE TRIGGER increase_number_of_comments_in_post AFTER INSERT ON 
+`comment` FOR EACH ROW UPDATE `post` SET 
+`number_of_comments` = `number_of_comments` + 1 WHERE `post_id` = `NEW`.`post_id`;";
+
+"CREATE TRIGGER decrease_number_of_comments_in_post AFTER DELETE ON 
+`comment` FOR EACH ROW UPDATE `post` SET 
+`number_of_comments` = `number_of_comments` - 1 WHERE `post_id` = `OLD`.`post_id`;";
+
+// Trigger to update number of likes
+"CREATE TRIGGER increase_number_of_likes_in_post AFTER INSERT ON 
+`like` FOR EACH ROW UPDATE `post` SET 
+`number_of_likes` = `number_of_likes` + 1 WHERE `post_id` = `NEW`.`post_id` AND `NEW`.`comment_id` IS NULL;";
+
+"CREATE TRIGGER decrease_number_of_likes_in_post AFTER DELETE ON 
+`like` FOR EACH ROW UPDATE `post` SET 
+`number_of_likes` = `number_of_likes` - 1 WHERE `post_id` = `OLD`.`post_id` AND `OLD`.`comment_id` IS NULL;";
+
+// Trigger to update number of likes
+"CREATE TRIGGER increase_number_of_likes_in_comment AFTER INSERT ON 
+`like` FOR EACH ROW UPDATE `comment` SET 
+`number_of_likes` = `number_of_likes` + 1 WHERE `comment_id` = `NEW`.`comment_id`;";
+
+"CREATE TRIGGER decrease_number_of_likes_in_comment AFTER DELETE ON 
+`like` FOR EACH ROW UPDATE `comment` SET 
+`number_of_likes` = `number_of_likes` - 1 WHERE `comment_id` = `OLD`.`comment_id`;";
 
 // data insertion
 "INSERT INTO category (category_name) VALUES 
@@ -53,36 +149,6 @@ $user['id'] = $_SESSION['user_id'];
     ('Faculty of Law (FOL)');
     ";
 
-// SUBCATEGORY TABLE
-"CREATE TABLE subcategory (
-    subcategory_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    subcategory_name VARCHAR(255) NOT NULL,
-    category_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES category(category_id),
-    number_of_posts INT(6) NOT NULL DEFAULT 0,
-    number_of_comments INT(6) NOT NULL DEFAULT 0
-    );";
-
-// Trigger to update number of post
-"CREATE TRIGGER update_number_of_posts_in_subcategory AFTER INSERT ON 
-    post FOR EACH ROW UPDATE subcategory SET 
-    numberofpost = numberofpost + 1 WHERE subcategory_id = NEW.subcategory_id";
-
-"CREATE TRIGGER update_number_of_posts_in_subcategory AFTER DELETE ON 
-    `post` FOR EACH ROW BEGIN UPDATE `subcategory` SET 
-    `number_of_posts` = `number_of_posts` - 1 WHERE `id` = `OLD`.`subcategory_id`; END";
-
-// Trigger to update number of comments
-"CREATE TRIGGER update_number_of_comments_in_subcategory AFTER INSERT ON 
-    `comment` FOR EACH ROW BEGIN UPDATE `subcategory` SET 
-    `number_of_comments` = `number_of_comments` + 1 WHERE `subcategory_id` = 
-    (SELECT `subcategory_id` FROM `post` WHERE `NEW`.`post_id` = `post_id`); END";
-
-"CREATE TRIGGER update_number_of_comments_in_subcategory AFTER DELETE ON 
-    `comment` FOR EACH ROW BEGIN UPDATE `subcategory`  SET 
-    `number_of_comments` = `number_of_comments` - 1 WHERE `subcategory_id` = 
-    (SELECT `subcategory_id` FROM `post` WHERE `OLD`.`post_id` = `post_id`); END";
-
-// data insertion
 "INSERT INTO subcategory (subcategory_name, category_id) VALUES 
     ('Annoucement' , 1),
     ('Club Activities' , 1),
@@ -137,70 +203,34 @@ $user['id'] = $_SESSION['user_id'];
     ('Contract Law', 9),
     ('Islamic Law', 9),
     ('Land Law', 9),
-    ('Things on Court', 9)
+    ('Things on Court', 9);
     ";
 
-// POST TABLE
-"CREATE TABLE post (
-    post_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    author_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES user(user_id),
-    subcategory_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES subcategory(subcategory_id),
-    post_name VARCHAR(255) NOT NULL,
-    post_description TEXT NOT NULL,
-    image_name VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    number_of_comments INT(6) DEFAULT 0 NOT NULL,
-    number_of_likes INT(6) DEFAULT 0 NOT NULL 
-    );";
+// insert new user
+"INSERT INTO user (username, email, user_pass) VALUES 
+    ('FCIstudent1', 'fci01@gmail.com', '123456')
+    ;";
 
-// Trigger to update number of comments
-"CREATE TRIGGER update_number_of_comments_in_post AFTER INSERT ON 
-`comment` FOR EACH ROW BEGIN UPDATE `post` SET 
-`number_of_comments` = `number_of_comments` + 1 WHERE `post_id` = `NEW`.`post_id`);";
+// insert new post
+"INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES 
+    (1, 2, 'Testing', 'this should be a description of the testing post', '');
+";
 
-"CREATE TRIGGER update_number_of_comments_in_post AFTER INSERT ON 
-`comment` FOR EACH ROW BEGIN UPDATE `post` SET 
-`number_of_comments` = `number_of_comments` - 1 WHERE `post_id` = `OLD`.`post_id`);";
+// insert new comment
+"INSERT INTO comment (commenter_id, post_id, comment_description) VALUES 
+    (1, 4, 'This is a example of comment')
+    ;";
 
-// Trigger to update number of likes
-"CREATE TRIGGER update_number_of_likes_in_post AFTER INSERT ON 
-`like` FOR EACH ROW BEGIN UPDATE `post` SET 
-`number_of_likes` = `number_of_likes` + 1 WHERE `post_id` = `NEW`.`post_id`; END";
+// insert new like for post
+"INSERT INTO `like` (user_id, post_id) VALUES 
+    (1, 4);";
 
-"CREATE TRIGGER update_number_of_likes_in_post AFTER INSERT ON 
-`like` FOR EACH ROW BEGIN UPDATE `post` SET 
-`number_of_likes` = `number_of_likes` - 1 WHERE `post_id` = `OLD`.`post_id`; END";
+// insert new like for comment
+"INSERT INTO `like` (user_id, post_id, comment_id) VALUES 
+    (1, 4, 2)
+    ;";
 
-// COMMENT TABLE
-"CREATE TABLE comment (
-    comment_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    commenter_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES user(user_id),
-    post_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES post(post_id),
-    comment_description TEXT NOT NULL,
-    comment_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    number_of_likes INT(6) NOT NULL DEFAULT 0
-    );";
-
-// Trigger to update number of likes
-"CREATE TRIGGER update_number_of_likes_in_comment AFTER INSERT ON 
-`like` FOR EACH ROW BEGIN UPDATE `comment` SET 
-`number_of_likes` = `number_of_likes` + 1 WHERE `comment_id` = `NEW`.comment_id`; END";
-
-"CREATE TRIGGER update_number_of_likes_in_comment AFTER INSERT ON 
-`like` FOR EACH ROW BEGIN UPDATE `comment` SET 
-`number_of_likes` = `number_of_likes` - 1 WHERE `comment_id` = `OLD`.comment_id`; END";
-
-
-// LIKE TABLE
-"CREATE TABLE `like` (
-    like_id INT(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES user(user_id),
-    post_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES post(post_id),
-    comment_id INT(6) UNSIGNED NOT NULL FOREIGN KEY REFERENCES comment(comment_id) DEFAULT 0
-);";
 // if the comment_id is 0, mean user like the post. If user like a comment, the entry will have comment_id and post_id
-
 // ------------------Queries--------------------
 $user_id = $user['id'];
 $post_id = 1;
@@ -285,14 +315,13 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 // like post
-"INSERT INTO like (user_id, post_id, comment_id) VALUES ($user_id, $post_id, 0);";
+"INSERT INTO `like` (user_id, post_id) VALUES ($user_id, $post_id);";
 // like comment
-"INSERT INTO like (user_id, post_id, comment_id) VALUES ($user_id, $post_id, $comment_id);";
+"INSERT INTO `like` (user_id, post_id, comment_id) VALUES ($user_id, $post_id, 0);";
 // delete like from post
 "DELETE FROM like WHERE post_id = $post_id AND comment_id = 0;";
 // delete like from comment
 "DELETE FROM like WHERE post_id = $post_id AND comment_id = $comment_id;";
-
 
 // ---------------------For references---------------------
 // check if this record is exist

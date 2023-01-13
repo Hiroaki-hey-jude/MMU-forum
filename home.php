@@ -2,32 +2,81 @@
 <html>
 
 <?php
-    // TODO: backend data
-    $categories[] = array(
-        "c0001",
-        "Announcement", 
-        array(
-            array("sc001", "Online Week", 3, 10), 
-            array("sc002", "Registration starts", 5, 40)
-        )
-    );
-    $categories[] = array(
-        "c0002",
-        "FCI", 
-        array(
-            array("sc003", "No Online Week", 3, 10), 
-            array("sc004", "Registration no more", 5, 40)
-        )
-    );
-    $categories[] = array(
-        "c0003",
-        "FCI", 
-        []
-    );
+    include 'includes/conn.php';
+    $errors = array();
+    session_start();
+    include 'includes/session.php';
 
-    // TODO: backend, cut to first 3 or 5
-    $recentPosts[] = array("p0000", "Announcement", 3, 10, "Lim", "12/12/2022", true);
-    $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
+    $category_table_data = array();
+    $query_get_all_categories = "SELECT * FROM category;";
+    $category_result = mysqli_query($conn, $query_get_all_categories);
+
+    if(!$category_result) {
+        array_push($errors, "Cannot select category from table");
+    }
+    
+    $subcategory_table_data = array();
+    $query_get_all_subcategories = "SELECT * FROM subcategory;";
+    $subcategory_result = mysqli_query($conn, $query_get_all_subcategories);
+    
+    if(!$subcategory_result) {
+        array_push($errors, "Cannot select subcategory from table");
+    }
+    
+    $recentPosts = array();
+    $query_get_recent_5_posts = "SELECT * FROM post ORDER BY created_at DESC LIMIT 5;";
+    $recent_posts_result = mysqli_query($conn, $query_get_recent_5_posts);
+
+    if(!$recent_posts_result) {
+        array_push($errors, "Cannot select latest 5 data");
+    }
+
+    // If there is no error
+    if (count($errors) == 0) {
+        // get those data from tables
+        while ($row = mysqli_fetch_assoc($category_result)) {
+            $category_table_data[] = $row;
+            // echo "safdfffffffffffffffffffffffffffffffffffffffffffffff sdfsdf    " . $category_table_data[0]['category_id'];
+        }
+        while ($row = mysqli_fetch_assoc($subcategory_result)) {
+            $subcategory_table_data[] = $row;
+        }
+        // populate the data into $categories array
+        for ($i = 0; $i < count($category_table_data); $i++) {
+            $subcategories = array();
+            for($j = 0; $j < count($subcategory_table_data); $j++) {
+                if($category_table_data[$i]['category_id'] == $subcategory_table_data[$j]['category_id']) {
+                    $subcategories[] = array(
+                        $subcategory_table_data[$j]['subcategory_id'], 
+                        $subcategory_table_data[$j]['subcategory_name'],
+                        $subcategory_table_data[$j]['number_of_posts'],
+                        $subcategory_table_data[$j]['number_of_comments']
+                    );
+                }
+            } 
+            $categories[] = array(
+                $category_table_data[$i]['category_id'] , $category_table_data[$i]['category_name'], $subcategories
+            );
+        }
+        
+        while($row = mysqli_fetch_assoc($recent_posts_result)) {
+            $query_to_get_author_name = "SELECT username FROM user WHERE user_id = " . $row['author_id'] . ";";
+            // $query_to_get_author_name = "SELECT username FROM user WHERE user_id = 300;";
+            $author_name_data = mysqli_query($conn, $query_to_get_author_name);
+            if(mysqli_num_rows($author_name_data) == 0)  {
+                array_push($errors, "Cannot get author name, user_id = " . $row['author_id'] . " doesn't exist in user table");
+                break;
+            }
+            $user_row = mysqli_fetch_assoc($author_name_data);
+            $author_name = $user_row['username'];
+            $recentPosts[] = array($row['post_id'], $row['post_name'] , $row['number_of_likes']
+                                    , $row['number_of_comments'], $author_name);
+        }
+    }
+    
+    // $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
+    
+    include 'errors.php';
 ?>
 
 <head lang="en">
@@ -55,9 +104,9 @@
                             type="post"
                             href="post-details.php?id='.$post[0].'" 
                             title="'.$post[1].'" 
-                            posts="'.$post[2].'" 
-                            comments="'.$post[3].'" 
-                            pinned="'.$post[4].'" 
+                            likes="'.$post[2].'" 
+                            comments="'.$post[3].'"
+                            author="'.$post[4].'"
                         />';
                 }
             ?>
@@ -100,7 +149,7 @@
                         echo '
                             <post-item
                                 type="subcategory"
-                                href="post-details.php?id='.$subcategory[0].'" 
+                                href="post-list.php?subcategory='.$subcategory[0].'" 
                                 title="'.$subcategory[1].'" 
                                 posts="'.$subcategory[2].'" 
                                 comments="'.$subcategory[3].'" 

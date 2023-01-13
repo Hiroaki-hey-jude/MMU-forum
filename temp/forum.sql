@@ -14271,7 +14271,7 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `user_pass` varchar(255) NOT NULL,
-  `profile_pic_name` varchar(255) DEFAULT 'filename',
+  `profile_pic_name` varchar(255) DEFAULT 'default.png',
   `number_of_posts` int(6) UNSIGNED DEFAULT 0,
   `number_of_comments` int(6) UNSIGNED DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

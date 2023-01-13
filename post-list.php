@@ -7,12 +7,12 @@
     <head>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/global.css" />
+        <script src="components/post-item.js"></script>
     </head>
     <body>
         <?php include "components/header.php" ?>
         <?php include "components/sidebar.php" ?>
         <div id="page-container">
-            <a href="home.php">home</a>
             <div class="post-list">
                 <div class="list-title primary-background">
                     Result

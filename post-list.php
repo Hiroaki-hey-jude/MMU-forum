@@ -39,29 +39,32 @@
         include('errors.php');
     ?>
     <head>
-        <link rel="stylesheet" link="css/reset.css" />
-        <link rel="stylesheet" link="css/global.css" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/global.css" />
     </head>
     <body>
         <?php include "components/header.php" ?>
-        <a href="home.php">home</a>
-        <div class="post-list">
-            <div class="list-title primary-background">
-                Result
+        <?php include "components/sidebar.php" ?>
+        <div id="page-container">
+            <a href="home.php">home</a>
+            <div class="post-list">
+                <div class="list-title primary-background">
+                    Result
+                </div>
+                <?php
+                    foreach($posts as $item){
+                        echo '
+                            <post-item
+                                href="post-details.php?id='.$item[0].'" 
+                                title="'.$item[1].'" 
+                                likes="'.$item[2].'" 
+                                comments="'.$item[3].'" 
+                                author="'.$item[4].'" 
+                                createdAt="'.$item[5].'" 
+                                pinned="'.$item[6].'" />';
+                    }
+                ?>
             </div>
-            <?php
-                foreach($posts as $item){
-                    echo '
-                        <post-item
-                            href="post-details.php?id='.$item[0].'" 
-                            title="'.$item[1].'" 
-                            likes="'.$item[2].'" 
-                            comments="'.$item[3].'" 
-                            author="'.$item[4].'" 
-                            createdAt="'.$item[5].'" 
-                            />';
-                }
-            ?>
         </div>
     </body>
 </html>

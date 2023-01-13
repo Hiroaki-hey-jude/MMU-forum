@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" link="css/reset.css" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/global.css" />
     </head>
     <body>
         <?php include "components/header.php" ?>
-        <a href="home.php">home</a>
+        <div class="page-container">
+            <a href="home.php">home</a>
+        </div>
     </body>
 </html>

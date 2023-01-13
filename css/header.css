@@ -60,16 +60,20 @@ header {
 
 /* USER */
 
-#header-user {
-  border: 3px solid gray;
+.header-user {
   border-radius: 15px;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   align-items: center;
   justify-content: center;
   display: flex;
+  background-color: white;
 }
 
-.user-icon {
+.header-user-icon {
   color: gray;
+}
+
+.header-user-name {
+  color: white;
 }

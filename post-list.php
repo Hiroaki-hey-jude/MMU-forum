@@ -38,7 +38,7 @@
     <body>
         <?php include "components/header.php" ?>
         <?php include "components/sidebar.php" ?>
-        <div id="page-container">
+        <div class="page-container">
             <div class="post-list">
                 <div class="list-title primary-background">
                     <?php echo $title ?>

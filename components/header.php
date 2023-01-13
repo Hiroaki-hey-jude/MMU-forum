@@ -16,11 +16,11 @@
         </a>
         <span class="header-span"></span>
         <span class="header-span"></span>
-        <div class="search-bar">
-            <input class="search-input" type="text" name="search" placeholder="Search for post" />
+        <form id="header-search-bar-form" class="search-bar" action="post-list.php">
+            <input id="header-search-bar" class="search-input" type="text" name="search" placeholder="Search for post"/>
             <!-- TODO: add search feature -->
-            <a href="#search"><span class="fas fa-search search-icon"></span></a>
-        </div>
+            <a onclick="document.getElementById('header-search-bar-form').submit();"><span class="fas fa-search search-icon"></span></a>
+        </form>
         <span style="flex: 1;"></span>
         <a id="header-user" href="#user"><span class="fas fa-user user-icon"></span></a>
     </header>

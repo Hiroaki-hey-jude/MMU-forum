@@ -1,13 +1,13 @@
 @import "theme.css";
 
 @media screen and (min-width: 850px) {
-  #page-container {
+  .page-container {
     margin: 0 0 0 10em;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  #page-container {
+  .page-container {
     margin-left: 0;
   }
 }

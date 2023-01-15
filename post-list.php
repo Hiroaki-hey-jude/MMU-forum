@@ -78,17 +78,20 @@
                     <?php echo $title ?>
                 </div>
                 <?php
-                    foreach($posts as $item){
-                        echo '
-                            <post-item
-                                href="post-details.php?id='.$item[0].'" 
-                                title="'.$item[1].'" 
-                                likes="'.$item[2].'" 
-                                comments="'.$item[3].'" 
-                                author="'.$item[4].'" 
-                                createdAt="'.$item[5].'"
-                            />';
-                    }
+                    if (empty($recentPosts))
+                        include 'components/placeholder.php';
+                    else
+                        foreach($posts as $item){
+                            echo '
+                                <post-item
+                                    href="post-details.php?id='.$item[0].'"
+                                    title="'.$item[1].'"
+                                    likes="'.$item[2].'"
+                                    comments="'.$item[3].'"
+                                    author="'.$item[4].'"
+                                    createdAt="'.$item[5].'"
+                                />';
+                        }
                 ?>
             </div>
         </div>

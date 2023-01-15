@@ -98,17 +98,19 @@
                 <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
-                foreach($recentPosts as $post){
-                    echo '
-                        <post-item
-                            type="post"
-                            href="post-details.php?id='.$post[0].'" 
-                            title="'.$post[1].'" 
-                            likes="'.$post[2].'" 
-                            comments="'.$post[3].'"
-                            author="'.$post[4].'"
-                        />';
-                }
+                if (empty($recentPosts))
+                    include 'components/placeholder.php';
+                else
+                    foreach($recentPosts as $post)
+                        echo '
+                            <post-item
+                                type="post"
+                                href="post-details.php?id='.$post[0].'"
+                                title="'.$post[1].'"
+                                likes="'.$post[2].'"
+                                comments="'.$post[3].'"
+                                author="'.$post[4].'"
+                            />';
             ?>
         </div>
         <div class="post-list bookmark-list">
@@ -117,50 +119,54 @@
                 <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
-                foreach($bookmarkedPosts as $post){
-                    echo '
-                        <post-item
-                            type="post"
-                            href="post-details.php?id='.$post[0].'" 
-                            title="'.$post[1].'" 
-                            posts="'.$post[2].'" 
-                            comments="'.$post[3].'" 
-                            pinned="'.$post[4].'" 
-                        />';
-                }
+                if (empty($bookmarkedPosts))
+                    include 'components/placeholder.php';
+                else 
+                    foreach($bookmarkedPosts as $post){
+                        echo '
+                            <post-item
+                                type="post"
+                                href="post-details.php?id='.$post[0].'"
+                                title="'.$post[1].'"
+                                posts="'.$post[2].'"
+                                comments="'.$post[3].'"
+                            />';
+                    }
             ?>
         </div>
     </aside>
     <div id="home-container">
         <?php
-            foreach ($categories as $category) {
-                echo '
-                    <div class="post-list">
-                        <div class="list-title">
-                            '.$category[1].'
-                            <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
-                        </div>
-                ';
+            if (empty($categories))
+                include 'components/placeholder.php';
+            else
+                foreach ($categories as $category) {
+                    echo '
+                        <div class="post-list">
+                            <div class="list-title">
+                                '.$category[1].'
+                                <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
+                            </div>
+                    ';
 
-                if (empty($category[2])) {
-                    echo '<div class="list-empty">List is empty.</div>';
-                } else {
-                    foreach($category[2] as $subcategory){
-                        echo '
-                            <post-item
-                                type="subcategory"
+                    if (empty($category[2])) 
+                        include 'components/placeholder.php';
+                    else
+                        foreach($category[2] as $subcategory){
+                            echo '
+                                <post-item
+                                    type="subcategory"
                                     href="post-list.php?id='.$subcategory[0].'&type=subcategory" 
-                                title="'.$subcategory[1].'" 
-                                posts="'.$subcategory[2].'" 
-                                comments="'.$subcategory[3].'" 
-                            />';
-                    }
-                }
-                
-                echo '
-                    </div>
-                ';
-            };
+                                    title="'.$subcategory[1].'"
+                                    posts="'.$subcategory[2].'"
+                                    comments="'.$subcategory[3].'"
+                                />';
+                        }
+                    
+                    echo '
+                        </div>
+                    ';
+                };
         ?>
         
     </div>

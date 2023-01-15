@@ -78,3 +78,23 @@ body {
 .post-item .fa-bookmark {
   color: var(--bookmark-color);
 }
+
+.post-header {
+  padding: 1em;
+}
+
+.post-title {
+  font-size: larger;
+  margin-bottom: 1em;
+}
+
+.post-header .post-image {
+  max-width: 100%;
+  float: left;
+  margin: 0 1em 1em 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .post-header .post-image {
+  }
+}

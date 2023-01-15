@@ -149,7 +149,7 @@
                         echo '
                             <post-item
                                 type="subcategory"
-                                href="post-list.php?subcategory='.$subcategory[0].'" 
+                                    href="post-list.php?id='.$subcategory[0].'&type=subcategory" 
                                 title="'.$subcategory[1].'" 
                                 posts="'.$subcategory[2].'" 
                                 comments="'.$subcategory[3].'" 

@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="css/header.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-
+<!-- TODO:
+    - reponsive header
+    - login and sign in button
+-->
 <body>
     <div class="header-div"></div>
     <header class="primary-background">

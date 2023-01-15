@@ -135,7 +135,7 @@
             ?>
         </div>
     </aside>
-    <div id="home-container">
+    <div id="home-container" class="page-container">
         <?php
             if (empty($categories))
                 include 'components/placeholder.php';

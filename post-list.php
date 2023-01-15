@@ -38,9 +38,9 @@
         // $posts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
         include('errors.php');
         
-        $search = $_GET["search"];
+        $search = $_GET["search"] ?? "";
         // passed from where the list was accessed
-        $type = $_GET["type"];
+        $type = $_GET["type"] ?? "";
         // TODO: (either one)
         // 1. based on the selected list type and id, query the name of the selected title
         // - id is already expected to be passed so no need to specifically pass title, but more steps on current page
@@ -86,8 +86,8 @@
                                 likes="'.$item[2].'" 
                                 comments="'.$item[3].'" 
                                 author="'.$item[4].'" 
-                                createdAt="'.$item[5].'" 
-                                pinned="'.$item[6].'" />';
+                                createdAt="'.$item[5].'"
+                            />';
                     }
                 ?>
             </div>

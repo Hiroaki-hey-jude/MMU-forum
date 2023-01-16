@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
 	}
 
 	$stmt = $conn->prepare("INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES (?,?,?,?,?)"); 
-	$stmt->bind_param("iisss", $user['id'], $subcategory_id, $title, $description, $image_link);
+	$stmt->bind_param("iisss", $_SESSION['user'], $subcategory_id, $title, $description, $image_link);
 	$stmt->execute();
 }
 
@@ -149,3 +149,4 @@ include 'errors.php';
 </script>
 
 </html>
+

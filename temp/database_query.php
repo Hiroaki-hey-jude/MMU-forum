@@ -71,6 +71,15 @@ $user['id'] = $_SESSION['user_id'];
     FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
 );";
 
+// BOOKMARK TABLE
+"CREATE TABLE bookmark (
+    bookmark_id INT(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(6) UNSIGNED NOT NULL,
+    post_id INT(6) UNSIGNED NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (post_id) REFERENCES post(post_id)
+);";
+
 // Trigger to update number of post
 "CREATE TRIGGER increase_number_of_posts_in_user
 AFTER INSERT ON post FOR EACH ROW

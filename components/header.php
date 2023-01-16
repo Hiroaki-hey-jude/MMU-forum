@@ -2,8 +2,13 @@
 <html>
 
 <?php
-    // TODO: link backend
-    $user = array("u0001", "Tian Hee", "Lim", "user_image_src");
+    // The session file need to be included before the header.php
+    // include "includes/session.php";
+    if (isset($user)) {
+        $user_data = array($user['user_id'], $user['username'], "images/".$user['profile_pic_name']);
+    } else {
+        $user_data = array("-1", "Guest");
+    }
 
 ?>
 
@@ -32,14 +37,14 @@
         </form>
         <span style="flex: 1;"></span>
         <?php
-            if ($user[3]) {
-                echo '<img src="https://picsum.photos/200" class="header-user" />';
+            if (isset($user) && $user_data[2]) {
+                echo '<a class="header-user" href="edit_profile.php"><img src="'. $user_data[2] .'" class="header-user" /></a>';
             } else {
-                echo '<a class="header-user" href="#user"><span class="fas fa-user header-user-icon"></span></a>';
+                echo '<a class="header-user" href="edit_profile.php"><span class="fas fa-user header-user-icon"></span></a>';
             }
         ?>
         <span class="header-span"></span>
-        <div class="header-user-name"><?php echo $user[1]; ?></div>
+        <div class="header-user-name"><?php echo $user_data[1]; ?></div>
         
     </header>
 </body>

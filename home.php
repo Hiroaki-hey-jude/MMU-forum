@@ -2,10 +2,8 @@
 <html>
 
 <?php
-    include 'includes/conn.php';
-    $errors = array();
-    session_start();
     include 'includes/session.php';
+    $errors = array();
 
     $category_table_data = array();
     $query_get_all_categories = "SELECT * FROM category;";
@@ -75,7 +73,26 @@
     }
     
     // $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
-    
+    // if the user already logged in
+    $bookmarked_posts = array();
+    if(isset ($user)) {
+        $query_get_bookmark = "SELECT * FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
+                WHERE user_id = ". $user['user_id']. ");";
+        $bookmark_data = mysqli_query($conn, $query_get_bookmark);
+        if($bookmark_data || mysqli_num_rows($bookmark_data) > 0) {
+            $limit = 5;
+            $i = 0;
+            while($row = mysqli_fetch_assoc($bookmark_data)) {
+                if($i == $limit) {
+                    break;
+                }
+                $bookmarked_posts[] = array($row['post_id'], $row['post_name'],
+                            $row['number_of_likes'], $row['number_of_comments'], true);
+                $i++;
+            }
+
+        }
+    }
     include 'errors.php';
 ?>
 

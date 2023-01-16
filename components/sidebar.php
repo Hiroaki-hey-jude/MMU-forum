@@ -2,7 +2,6 @@
 <html>
     <?php
     // include 'includes/session.php';
-        $test = $_SERVER['REQUEST_URI'];
         $options[] = array("home", "Home", "home", "home.php");
         $options[] = array("profile", "Profile", "user", "edit-profile.php");
         $options[] = array("logout", "Log out", "door-open", "logout.php");
@@ -20,8 +19,6 @@
                 <a href="'.$option[3].'">
                     <div class="sidebar-button';
                 
-                if(str_contains($test, $option[3]))
-                    echo ' sidebar-button-selected ';
                 if ($option[0] == "logout")
                     echo ' logout-button';
                 

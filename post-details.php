@@ -11,6 +11,7 @@
         $noOfLikes = 3 ?? 0;
         $noOfComments = 10 ?? 0;
         $isPostLiked = true;
+        $isBookmarked = true;
         $comments[] = array("cm0001", "https://picsum.photos/200", "comment author", "12/12/2022", "comment desc", true, 30);
         $comments[] = array("cm0002", "https://picsum.photos/200", "comment author 1", "12/12/2022", "comment desc 1", false, 10);
         $comments[] = array("cm0001", "https://picsum.photos/200", "comment author 2", "12/12/2022", "comment desc 2", true, 30);
@@ -34,11 +35,24 @@
                 <p class="post-description"><?php echo $description; ?></p>
             </article>
             <section class="post-actions">
-                <div class="post-action" onclick="window.alert('TODO: backend add like');"><span class="post-action-icon <?php
-                    if ($isPostLiked)
-                        echo 'liked';
-                ?> fas fa-thumbs-up"></span><?php echo $noOfLikes; ?></div>
-                <div class="post-action" onclick="document.getElementById('post-comment-input').focus();"><span class="post-action-icon fas fa-comments"></span><?php echo $noOfComments; ?></div>
+                <div class="post-action" onclick="window.alert('TODO: backend add like');">
+                    <span class="post-action-icon <?php
+                        if ($isPostLiked)
+                            echo 'liked';
+                    ?> fas fa-thumbs-up"></span>
+                    <?php echo $noOfLikes; ?>
+                </div>
+                <div class="post-action" onclick="document.getElementById('post-comment-input').focus();">
+                    <span class="post-action-icon fas fa-comments"></span>
+                    <?php echo $noOfComments; ?>
+                </div>
+                <span style="flex: 1;"></span>
+                <div class="post-action" style="margin-right: 0;" onclick="window.alert('TODO: backend add bookmark');">
+                    <span class="post-action-icon <?php
+                        if ($isBookmarked)
+                            echo 'bookmarked';
+                    ?> fas fa-bookmark" style="margin-right: 0;"></span>
+                </div>
             </section>
             <section class="post-comments">
                 <?php

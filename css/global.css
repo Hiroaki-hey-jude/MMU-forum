@@ -20,7 +20,9 @@ body {
 
 .post-action {
   text-align: center;
-  margin-right: 0.5em;
+  margin-right: 1em;
+  align-items: center;
+  display: flex;
 }
 
 .post-action-icon {
@@ -32,6 +34,9 @@ body {
 
 .liked {
   color: var(--primary-color);
+}
+.bookmarked {
+  color: var(--bookmark-color);
 }
 
 .list-item-title {

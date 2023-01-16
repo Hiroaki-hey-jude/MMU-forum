@@ -147,6 +147,7 @@
                                 title="'.$post[1].'"
                                 posts="'.$post[2].'"
                                 comments="'.$post[3].'"
+                                bookmarked="'.$post[4].'"
                             />';
                     }
             ?>

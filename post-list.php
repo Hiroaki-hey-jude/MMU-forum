@@ -91,7 +91,7 @@
             array_push($errors, "Error, there is no such type to be passed into post-list!");
         }
         include('errors.php');
-   ?>
+    ?>
     <head>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/global.css" />
@@ -106,20 +106,20 @@
                     <?php echo $title ?>
                 </div>
                 <?php
-                    foreach($posts as $item){
-                        echo '
-                            <post-item
-                                href="post-details.php?id='.$item[0].'" 
-                                title="'.$item[1].'" 
-                                likes="'.$item[2].'" 
-                                comments="'.$item[3].'" 
-                                author="'.$item[4].'" 
-                                createdAt="'.$item[5].'" 
-                                pinned="'.$item[6].'" />';
-                    }
-                    // if(count($posts) == 0) {
-                    //     echo "There is no result.";
-                    // }
+                    if (count($posts))
+                        include 'components/placeholder.php';
+                    else
+                        foreach($posts as $item){
+                            echo '
+                                <post-item
+                                    href="post-details.php?id='.$item[0].'"
+                                    title="'.$item[1].'"
+                                    likes="'.$item[2].'"
+                                    comments="'.$item[3].'"
+                                    author="'.$item[4].'"
+                                    createdAt="'.$item[5].'"
+                                />';
+                        }
                 ?>
             </div>
         </div>

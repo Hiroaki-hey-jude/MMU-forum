@@ -2,19 +2,13 @@
 
 @media screen and (min-width: 850px) {
   #home-container {
-    margin: 0 var(--right-width) 0 var(--sidebar-width);
+    margin-right: var(--right-width);
   }
 }
 
 @media screen and (max-width: 850px) {
   #right-pane {
     display: none;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  #home-container {
-    margin-left: 0;
   }
 }
 

@@ -1,17 +1,5 @@
 @import "theme.css";
 
-@media screen and (min-width: 850px) {
-  .page-container {
-    margin: 0 0 0 10em;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .page-container {
-    margin-left: 0;
-  }
-}
-
 body {
   background-color: rgb(250, 250, 250);
 }
@@ -32,12 +20,23 @@ body {
 
 .post-action {
   text-align: center;
+  margin-right: 1em;
+  align-items: center;
+  display: flex;
 }
 
 .post-action-icon {
   color: gray;
-  margin: 0 0.5em 0;
+  margin-right: 0.5em;
   text-align: center;
+  cursor: pointer;
+}
+
+.liked {
+  color: var(--primary-color);
+}
+.bookmarked {
+  color: var(--bookmark-color);
 }
 
 .list-item-title {
@@ -77,4 +76,106 @@ body {
 
 .post-item .fa-bookmark {
   color: var(--bookmark-color);
+}
+
+.post-header {
+  padding: 1em;
+}
+
+.post-title {
+  font-size: x-large;
+  margin-bottom: 0.5em;
+}
+
+.post-author {
+  color: gray;
+  font-size: medium;
+  display: flex;
+  align-items: center;
+}
+
+.post-author-image {
+  border-radius: 15px;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  background-color: white;
+  margin-right: 0.5em;
+}
+
+.post-header .post-author {
+  margin-bottom: 1em;
+}
+
+.post-header .post-image {
+  max-width: 100%;
+  float: left;
+  margin-right: 1em;
+}
+
+.post-actions {
+  display: flex;
+  clear: both;
+  padding: 1em;
+  background-color: white;
+  box-shadow: 0 0 1px gray;
+}
+
+.post-comment {
+  padding: 1em;
+  background-color: white;
+  border-top: 1px solid lightgray;
+}
+
+.post-comment .post-author {
+  margin-bottom: 0.5em;
+}
+
+.post-comment-actions {
+  display: flex;
+  padding: 0.5em 0;
+}
+
+.post-comment-input {
+  background-color: white;
+  padding: 1em;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 1px gray;
+}
+
+.post-comment-input textarea {
+  flex: 1;
+  resize: vertical;
+}
+
+.post-comment-send-button {
+  background-color: var(--primary-color);
+  color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+@media screen and (min-width: 600px) {
+  .page-container {
+    margin-left: var(--sidebar-width);
+  }
+  .post-comment-input {
+    left: var(--sidebar-width);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
 }

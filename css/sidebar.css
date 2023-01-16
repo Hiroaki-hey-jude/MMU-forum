@@ -35,9 +35,3 @@
   text-align: center;
   width: 1em;
 }
-
-@media screen and (max-width: 1000px) {
-  .sidebar {
-    display: none;
-  }
-}

@@ -72,7 +72,7 @@
         }
     }
     
-    // $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
+    // $bookmarked_posts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
     // if the user already logged in
     $bookmarked_posts = array();
     if(isset ($user)) {
@@ -115,17 +115,19 @@
                 <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
-                foreach($recentPosts as $post){
-                    echo '
-                        <post-item
-                            type="post"
-                            href="post-details.php?id='.$post[0].'" 
-                            title="'.$post[1].'" 
-                            likes="'.$post[2].'" 
-                            comments="'.$post[3].'"
-                            author="'.$post[4].'"
-                        />';
-                }
+                if (count($recentPosts) === 0)
+                    include 'components/placeholder.php';
+                else
+                    foreach($recentPosts as $post)
+                        echo '
+                            <post-item
+                                type="post"
+                                href="post-details.php?id='.$post[0].'"
+                                title="'.$post[1].'"
+                                likes="'.$post[2].'"
+                                comments="'.$post[3].'"
+                                author="'.$post[4].'"
+                            />';
             ?>
         </div>
         <div class="post-list bookmark-list">
@@ -134,50 +136,56 @@
                 <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
-                foreach($bookmarked_posts as $post){
-                    echo '
-                        <post-item
-                            type="post"
-                            href="post-details.php?id='.$post[0].'" 
-                            title="'.$post[1].'" 
-                            posts="'.$post[2].'" 
-                            comments="'.$post[3].'" 
-                            pinned="'.$post[4].'" 
-                        />';
-                }
+                if (count($bookmarked_posts) === 0)
+                    include 'components/placeholder.php';
+                else 
+                    foreach($bookmarked_posts as $post){
+                        echo '
+                            <post-item
+                                type="post"
+                                href="post-details.php?id='.$post[0].'"
+                                title="'.$post[1].'"
+                                posts="'.$post[2].'"
+                                comments="'.$post[3].'"
+                                bookmarked="'.$post[4].'"
+                            />';
+                    }
             ?>
         </div>
     </aside>
-    <div id="home-container">
+    <div id="home-container" class="page-container">
         <?php
-            foreach ($categories as $category) {
-                echo '
-                    <div class="post-list">
-                        <div class="list-title">
-                            '.$category[1].'
-                            <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
+            if (count($categories) === 0)
+                include 'components/placeholder.php';
+            else
+                foreach ($categories as $category) {
+                    echo '
+                        <div class="post-list">
+                            <div class="list-title">
+                                '.$category[1].'
+                                <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
+                            </div>
+                    ';
+                    if (empty($category[2])) 
+                        include 'components/placeholder.php';
+                    else if (count($category[2]) === 0) 
+                        include 'components/placeholder.php';
+                    else
+                        foreach($category[2] as $subcategory){
+                            echo '
+                                <post-item
+                                    type="subcategory"
+                                    href="post-list.php?id='.$subcategory[0].'&type=subcategory" 
+                                    title="'.$subcategory[1].'"
+                                    posts="'.$subcategory[2].'"
+                                    comments="'.$subcategory[3].'"
+                                />';
+                        }
+                    
+                    echo '
                         </div>
-                ';
-                
-                if (empty($category[2])) {
-                    echo '<div class="list-empty">List is empty.</div>';
-                } else {
-                    foreach($category[2] as $subcategory){
-                        echo '
-                            <post-item
-                                type="subcategory"
-                                href="post-list.php?id='.$subcategory[0].'&type=subcategory" 
-                                title="'.$subcategory[1].'" 
-                                posts="'.$subcategory[2].'" 
-                                comments="'.$subcategory[3].'" 
-                            />';
-                    }
-                }
-                
-                echo '
-                    </div>
-                ';
-            };
+                    ';
+                };
         ?>
         
     </div>

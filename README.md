@@ -12,11 +12,11 @@ To-do list:
 - [x] login.php
 - [x] profile.php
 - [x] edit\_profile.php
-- [ ] Search function
-- [ ] home.php	
-	- [ ] view categories
-	- [ ] view sub-categories
-	- [ ] view post list
+- [x] Search function
+- [x] home.php	
+	- [x] view categories
+	- [x] view sub-categories
+	- [x] view post list
 - [ ] View posts' details 	
 	- [ ] upvoting
 	- [ ] post comment
@@ -31,7 +31,7 @@ Memo:
 	- [ ] Add success message in edit\_profile.php and show it in profile.php
 - [ ] Redirect to home.php in login.php (after a successful login)
 - [ ] Redirect to profile.php in edit\_profile.php 
-- [ ] Create redirect.php (redirect to login.php if cookies is not presented)
+- [x] Create redirect.php (redirect to login.php if cookies is not presented)
 
 ### Frontend
 

@@ -18,6 +18,7 @@
 .sidebar-button {
   display: flex;
   align-items: center;
+  height: 3em;
 }
 
 .sidebar-button-selected,
@@ -31,7 +32,6 @@
 }
 
 .sidebar-icon {
-  margin: 1em;
   text-align: center;
-  width: 1em;
+  width: 3em;
 }

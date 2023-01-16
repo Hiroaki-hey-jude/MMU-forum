@@ -59,3 +59,42 @@ select {
 .post-create:focus {
     outline:solid 2px black;
 }
+
+.edit-post-container input {
+    border: solid 1px;
+    padding: 7px;
+    background-color: white;
+}
+
+input {
+    width: 50%;
+}
+
+input:focus {
+    outline:solid 2px black;
+}
+
+textarea {
+    width: 100%;
+    display: block;
+    padding: 3px;
+}
+
+textarea:focus {
+    outline:solid 2px pink;
+}
+
+@media screen and (max-width: 480px) {
+    .edit-post-container {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .choose-category  {
+        display: block;
+    }
+
+    input {
+        width: 80%;
+    }
+}

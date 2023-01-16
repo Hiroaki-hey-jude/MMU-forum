@@ -1,75 +1,46 @@
 <?php
-//backend data
-$categories[] = array(
-    //`category_id`, `category_name`
-    "1",
-    "GENERAL", 
-);
-$categories[] = array(
-    "2",
-    "aculty of Computing and Informatics (FCI)", 
-);
-$categories[] = array(
-    "3",
-    "Faculty of Engineering (FOE) & Faculty of Engineering & Technology (FET)", 
-);
-$categories[] = array(
-    "4",
-    "Faculty of Management (FOM) & Faculty of Business (FOB)", 
-);
-$categories[] = array(
-    "5",
-    "Faculty of Creative Multimedia (FCM)", 
-);
-$categories[] = array(
-    "6",
-    "Faculty of Applied Communication (FAC)", 
-);
-$categories[] = array(
-    "7",
-    "Fad (FED)", 
-);
 
-// $subcategories[] = array(
-//     "1", "Annoucement", "1", "18", "46"
-// );
-$subcategories[] = array(
-    //`subcategory_id`, `subcategory_name`, `category_id`, `number_of_posts`, `number_of_comments`
-    "1", "Annoucement", "1", "18", "46"
-);
-$subcategories[] = array(
-    "2", "Club Activities", "1", "16", "46"
-);
-$subcategories[] = array(
-    "3", "Feedback and Helpdesk", "1", "16", "46"
-);
-$subcategories[] = array(
-    "4", "Admission & Enrollment", "1", "22", "72"
-);
-$subcategories[] = array(
-    "5", "Hostel Discussion", "1", "15", "44"
-);
-$subcategories[] = array(
-    "6", "Computer Science in General", "2", "15", "44"
-);
-$subcategories[] = array(
-    "7", "Nanotechnology", "3", "15", "44"
-);
-$subcategories[] = array(
-    "8", "Digital Enterprise", "4", "15", "44"
-);
-$subcategories[] = array(
-    "9", "Virtual Reality", "5", "15", "44"
-);
-$subcategories[] = array(
-    "10", "Media Culture", "6", "15", "44"
-);
-$subcategories[] = array(
-    "11", "Movie Production", "7", "15", "44"
-);
+include 'includes/conn.php';
+$errors = array();
+session_start();
+include 'includes/session.php';
+
+$categories = array();
+$query_get_all_categories = "SELECT * FROM category;";
+$category_result = mysqli_query($conn, $query_get_all_categories);
+
+if (!$category_result) {
+	array_push($errors, "Cannot select category from table");
+}
+
+$subcategories = array();
+$query_get_all_subcategories = "SELECT * FROM subcategory;";
+$subcategory_result = mysqli_query($conn, $query_get_all_subcategories);
+    
+if(!$subcategory_result) {
+    array_push($errors, "Cannot select subcategory from table");
+}
+
+if (count($errors) == 0) {
+	while ($row = mysqli_fetch_assoc($category_result)) {
+		$categories[] = array($row['category_id'], $row['category_name']);
+	}	
+	while ($row = mysqli_fetch_assoc($subcategory_result)) {
+		$subcategories[] = array(
+				$row['subcategory_id'],
+				$row['subcategory_name'],
+				$row['category_id'],
+				$row['number_of_posts'],
+				$row['number_of_comments']
+		);
+	}
+}
+include 'errors.php';
+
 $subcategories_clone = $subcategories;
 $subcategories =  json_encode($subcategories);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +94,7 @@ $subcategories =  json_encode($subcategories);
                         <?php
                         foreach($subcategories_clone as $subcategory){
                             echo '
-                            <option id="'.$subcategory[1].'" value="'.$subcategory[1].'">'.$subcategory[1].'</option>
+                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[1].'">'.$subcategory[1].'</option>
                             ';
                         }    
                         ?>
@@ -152,11 +123,12 @@ $subcategories =  json_encode($subcategories);
         for(let i = 0; i < subcategoriesFromPHP.length; i++) {
             if(selectedCategoryIndex != subcategoriesFromPHP[i][2]) {
                 console.log(subcategoriesFromPHP[i][1]);
-                document.getElementById(subcategoriesFromPHP[i][1]).style.display = "none";
+                document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "none";
             } else {
-                document.getElementById(subcategoriesFromPHP[i][1]).style.display = "block";
+                document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "block";
             }
         }
     }
 </script>
+
 </html>

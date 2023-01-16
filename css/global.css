@@ -177,5 +177,6 @@ body {
 @media screen and (max-width: 600px) {
   .sidebar {
     display: none;
+    width: 100%;
   }
 }

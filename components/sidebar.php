@@ -17,9 +17,20 @@
     <head>
         <link rel="stylesheet" href="css/sidebar.css" />
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener('resize', function(event) {
+                const curWidth = event.target.innerWidth;
+                if (curWidth > 600) {
+                    document.getElementById("sidebar").style.width = "10em";
+                    document.getElementById("sidebar").style.display = "block";
+                } else {
+                    document.getElementById("sidebar").style.width = "100%";
+                }
+            });
+        </script>
     </head>
     <body>
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar">
         <?php
             foreach ($options as $option) {
                 echo '

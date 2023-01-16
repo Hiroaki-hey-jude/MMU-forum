@@ -4,6 +4,7 @@ include 'includes/conn.php';
 $errors = array();
 session_start();
 include 'includes/session.php';
+include 'includes/redirect.php';
 
 $categories = array();
 $query_get_all_categories = "SELECT * FROM category;";
@@ -36,10 +37,13 @@ if (count($errors) == 0) {
 	}
 }
 
+include 'errors.php';
+
 $subcategories_clone = $subcategories;
 $subcategories = json_encode($subcategories);
 
 if (isset($_POST['submit'])) {
+	$errors = array();
 	$title = $_POST['title'];
 	$image_link = $_POST['image'];
 	$description = $_POST['description'];
@@ -50,9 +54,15 @@ if (isset($_POST['submit'])) {
 		$image_link = "";
 	}
 
-	$stmt = $conn->prepare("INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES (?,?,?,?,?)"); 
-	$stmt->bind_param("iisss", $_SESSION['user'], $subcategory_id, $title, $description, $image_link);
-	$stmt->execute();
+	if(empty($title) || empty($description) || empty($subcategory_id) || empty($title)) {
+    		array_push($errors, "Missing parameter! You must submit the post title, description, category and subcategory.");
+	}
+
+	if (count($errors) == 0) {
+		$stmt = $conn->prepare("INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES (?,?,?,?,?)"); 
+		$stmt->bind_param("iisss", $_SESSION['user'], $subcategory_id, $title, $description, $image_link);
+		$stmt->execute();
+	}
 }
 
 include 'errors.php';

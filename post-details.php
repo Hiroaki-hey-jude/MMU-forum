@@ -42,7 +42,7 @@
             </section>
             <section class="post-comments">
                 <?php
-                    if (empty($comments) || $noOfComments === 0)
+                    if ($noOfComments === 0)
                         echo '<div class="list-empty">No comments.</div>';
                     else
                         foreach ($comments as $comment) {

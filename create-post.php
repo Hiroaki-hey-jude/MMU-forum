@@ -35,10 +35,27 @@ if (count($errors) == 0) {
 		);
 	}
 }
-include 'errors.php';
 
 $subcategories_clone = $subcategories;
-$subcategories =  json_encode($subcategories);
+$subcategories = json_encode($subcategories);
+
+if (isset($_POST['submit'])) {
+	$title = $_POST['title'];
+	$image_link = $_POST['image'];
+	$description = $_POST['description'];
+	//$category_id = $_POST['category-names'];
+	$subcategory_id = $_POST['subcategory-names'];
+
+	if(empty($image_link)) {
+		$image_link = "";
+	}
+
+	$stmt = $conn->prepare("INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES (?,?,?,?,?)"); 
+	$stmt->bind_param("iisss", $user['id'], $subcategory_id, $title, $description, $image_link);
+	$stmt->execute();
+}
+
+include 'errors.php';
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +111,7 @@ $subcategories =  json_encode($subcategories);
                         <?php
                         foreach($subcategories_clone as $subcategory){
                             echo '
-                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[1].'">'.$subcategory[1].'</option>
+                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>
                             ';
                         }    
                         ?>

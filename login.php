@@ -1,41 +1,41 @@
 <?php
 
-include 'includes/conn.php';
+include 'includes/session.php';
+// include 'includes/conn.php'; // for testing use, use this when you want to try different user without session
+$errors = array();
 
+if (isset($user)) {
+    array_push($errors, "You already logged in");
+    header("Location: home.php");
+}
 if (isset($_POST['submit'])) {
-
     $email = $_POST['email'];
-    $password = $_POST['password'];
-    
+    $password = $_POST['password']; 
     
     $loginEntry = $conn->prepare("SELECT * from user WHERE email = ?");
     $loginEntry->bind_param("s", $email);
     $loginEntry->execute();
     
     $result = $loginEntry->get_result();
-    $row = $result->fetch_assoc();
-    $hashed_password = $row['user_pass'];
-
-    if(password_verify($password,$hashed_password)) {
-        echo "The user is exist <br>";
-        session_start();
-        echo "ID: " . $row['user_id'] . "<br>";
-        echo "Username: " . $row['username'] . "<br>";
-        echo "Email: " . $row['email'] . "<br>";
-        echo "Password : " . $row['user_pass'] . "<br>";
-        echo "<h2> Here will show homepage with logged in details and established session</h2>";
-        $_SESSION['user'] = $row['user_id'];
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['email'] = $row['email'];
-        $_SESSION['userrole'] = 'user';
-        // direct to home page 
-        exit;
-    } else {
-        // Go back to the login page and show erry
-        header("Location: " . $_SERVER['PHP_SELF'] . "?error=invalidUser");
-        exit;
+    if(mysqli_num_rows($result) == 0 || !$result) {
+        array_push($errors, "Log in failed. This user (email) does not exists");
     }
+    else {
+        $row = $result->fetch_assoc();
+        $hashed_password = $row['user_pass'];
+        if(password_verify($password,$hashed_password)) {
+            session_start();
+            $_SESSION['user'] = $row['user_id'];
+            // direct to home page 
+            header("Location: home.php");
+            exit;
+        } else {
+            array_push($errors, "Log in failed. Please check your password");
+        }
+    }
+    
 }
+include "errors.php";
 
 ?>
 
@@ -57,11 +57,6 @@ if (isset($_POST['submit'])) {
             <input type="password" name="password" required placeholder="enter your password">
             <input type="submit" name = "submit" value="Login now" class="reg-button">
             <p>don't have an account? <a href="register.php">register now</a></p>
-            <?php
-                if(isset($_GET['error']) && $_GET['error'] == 'invalidUser') {
-                echo "<div class = 'login-failed'>Log in failed. Please check your email or password</div>";
-                }
-            ?>
         </form>
     </div>
 </body>

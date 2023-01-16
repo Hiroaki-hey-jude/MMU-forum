@@ -9,11 +9,7 @@
 </head>
 <body class="edit-profile-body">
 	<?php 
-        	session_start();
-		include 'includes/session.php'; 
-		if (!isset($_SESSION['user'])) {
-			header('location: login.php');
-		}
+		include 'includes/redirect.php';
 	?>
 	
     <div class="wrapper">
@@ -59,10 +55,7 @@
 
 <?php
 
-include 'includes/conn.php';
 $errors = array();
-session_start();
-include 'includes/session.php';
 
 if(isset($_POST['edit'])){
 	$curr_password = $_POST['curr_password'];

@@ -4,7 +4,7 @@
     // include 'includes/session.php';
         $test = $_SERVER['REQUEST_URI'];
         $options[] = array("home", "Home", "home", "home.php");
-        $options[] = array("profile", "Profile", "user", "profile.php");
+        $options[] = array("profile", "Profile", "user", "edit-profile.php");
         $options[] = array("logout", "Log out", "door-open", "logout.php");
         $lastOption = end($options);
     ?>

@@ -3,5 +3,7 @@
   --bookmark-color: rgb(101, 208, 101);
   --header-height: 56px;
   --sidebar-width: 10em;
+  --sidebar-min-width: 600px;
   --right-width: 20em;
+  --right-min-width: 850px;
 }

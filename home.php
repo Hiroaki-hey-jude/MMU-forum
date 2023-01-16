@@ -72,7 +72,7 @@
         }
     }
     
-    // $bookmarkedPosts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
+    // $bookmarked_posts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
     // if the user already logged in
     $bookmarked_posts = array();
     if(isset ($user)) {
@@ -115,7 +115,7 @@
                 <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
-                if (empty($recentPosts))
+                if (count($recentPosts) === 0)
                     include 'components/placeholder.php';
                 else
                     foreach($recentPosts as $post)
@@ -136,10 +136,10 @@
                 <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
-                if (empty($bookmarkedPosts))
+                if (count($bookmarked_posts) === 0)
                     include 'components/placeholder.php';
                 else 
-                    foreach($bookmarkedPosts as $post){
+                    foreach($bookmarked_posts as $post){
                         echo '
                             <post-item
                                 type="post"
@@ -154,7 +154,7 @@
     </aside>
     <div id="home-container" class="page-container">
         <?php
-            if (empty($categories))
+            if (count($categories) === 0)
                 include 'components/placeholder.php';
             else
                 foreach ($categories as $category) {
@@ -165,8 +165,9 @@
                                 <a class="view-all" href="post-list.php?id='.$category[0].'&type=category">View All</a>
                             </div>
                     ';
-
                     if (empty($category[2])) 
+                        include 'components/placeholder.php';
+                    else if (count($category[2]) === 0) 
                         include 'components/placeholder.php';
                     else
                         foreach($category[2] as $subcategory){

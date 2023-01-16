@@ -106,7 +106,7 @@
                     <?php echo $title ?>
                 </div>
                 <?php
-                    if (empty($posts))
+                    if (count($posts))
                         include 'components/placeholder.php';
                     else
                         foreach($posts as $item){

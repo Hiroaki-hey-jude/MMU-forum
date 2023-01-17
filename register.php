@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
                 $stmt = $conn->prepare("insert into user (username, email, user_pass) values (?,?,?)");
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
                 $stmt->execute();
-                header('location: login.php');
+                header('location: login.php?register=true');
         }
 }
 

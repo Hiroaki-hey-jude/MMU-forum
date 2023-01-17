@@ -31,6 +31,7 @@ Memo:
 	- [x] Add success message in edit\_profile.php 
 	- [x] Add success message in create\_post.php 
 - [x] Create redirect.php (redirect to login.php if cookies is not presented)
+- [ ] In home.php, redirect the user to profile.php instead of edit-profile.php after clicking profile buttons
 
 ### Frontend
 

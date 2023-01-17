@@ -110,6 +110,7 @@ if(isset($_POST['edit'])){
 		$stmt = $conn->prepare("UPDATE user SET user_pass= ?, username= ?, profile_pic_name= ? WHERE user_id=?");
 		$stmt->bind_param("sssi", $new_password, $username, $filename, $user['user_id']);
 		$stmt->execute();
+		header('location: edit-profile.php');
 	}
 }
 

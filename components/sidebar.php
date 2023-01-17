@@ -31,6 +31,9 @@
     </head>
     <body>
     <nav class="sidebar" id="sidebar">
+        <form id="sidebar-search-bar-form" class="sidebar-search-bar" action="post-list.php">
+            <input class="sidebar-search-input" type="text" name="search" placeholder="Search for post"/>
+        </form>
         <?php
             foreach ($options as $option) {
                 echo '

@@ -24,10 +24,6 @@
         }
     </script>
 </head>
-<!-- TODO:
-    - reponsive header
-    - login and sign in button
--->
 <body>
     <div class="header-div"></div>
     <header class="primary-background">
@@ -40,7 +36,6 @@
         <span class="header-span"></span>
         <form id="header-search-bar-form" class="search-bar" action="post-list.php">
             <input id="header-search-bar" class="search-input" type="text" name="search" placeholder="Search for post"/>
-            <!-- TODO: add search feature -->
             <a onclick="document.getElementById('header-search-bar-form').submit();"><span class="fas fa-search search-icon"></span></a>
         </form>
         <span style="flex: 1;"></span>

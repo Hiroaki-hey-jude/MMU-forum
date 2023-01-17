@@ -22,14 +22,14 @@ To-do list:
 	- [ ] post comment
 	- [ ] report post or comment
 	- [ ] share post (generate URL)
-- [ ] Create post function
+- [x] Create post function
 
 Memo:
 
 - [x] Discussion on how to show/return success message
-	- [ ] Add success message in register.php
+	- [x] Add success message in register.php
 	- [x] Add success message in edit\_profile.php 
-- [x] Redirect to home.php in login.php (after a successful login)
+	- [x] Add success message in create\_post.php 
 - [x] Create redirect.php (redirect to login.php if cookies is not presented)
 
 ### Frontend

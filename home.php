@@ -9,24 +9,37 @@
     $query_get_all_categories = "SELECT * FROM category;";
     $category_result = mysqli_query($conn, $query_get_all_categories);
 
-    if(!$category_result) {
-        array_push($errors, "Cannot select category from table");
-    }
-    
     $subcategory_table_data = array();
     $query_get_all_subcategories = "SELECT * FROM subcategory;";
     $subcategory_result = mysqli_query($conn, $query_get_all_subcategories);
     
-    if(!$subcategory_result) {
-        array_push($errors, "Cannot select subcategory from table");
-    }
-    
     $recentPosts = array();
     $query_get_recent_5_posts = "SELECT * FROM post ORDER BY created_at DESC LIMIT 5;";
     $recent_posts_result = mysqli_query($conn, $query_get_recent_5_posts);
+    
+    $bookmarked_posts = array();
+    if(isset ($user)) {
+        $query_get_bookmark = $conn->prepare("SELECT * FROM post WHERE post_id IN 
+                (SELECT `post_id` FROM bookmark WHERE user_id = ?);");
+        $query_get_bookmark->bind_param("i", $user["user_id"]);
+        $query_get_bookmark->execute();
+        $bookmark_data = $query_get_bookmark->get_result();
+        // $query_get_bookmark = "SELECT * FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
+        //         WHERE user_id = ". $user['user_id']. ");";
+        // $bookmark_data = mysqli_query($conn, $query_get_bookmark);
+    }
 
     if(!$recent_posts_result) {
         array_push($errors, "Cannot select latest 5 data");
+    }
+    if(!$subcategory_result) {
+        array_push($errors, "Cannot select subcategory from table");
+    }
+    if(!$category_result) {
+        array_push($errors, "Cannot select category from table");
+    }
+    if(!$bookmark_data) {
+        array_push($errors, "Cannot select bookmark from table");
     }
 
     // If there is no error
@@ -34,7 +47,6 @@
         // get those data from tables
         while ($row = mysqli_fetch_assoc($category_result)) {
             $category_table_data[] = $row;
-            // echo "safdfffffffffffffffffffffffffffffffffffffffffffffff sdfsdf    " . $category_table_data[0]['category_id'];
         }
         while ($row = mysqli_fetch_assoc($subcategory_result)) {
             $subcategory_table_data[] = $row;
@@ -57,6 +69,7 @@
             );
         }
         
+        // get all 5 recent post
         while($row = mysqli_fetch_assoc($recent_posts_result)) {
             $query_to_get_author_name = "SELECT username FROM user WHERE user_id = " . $row['author_id'] . ";";
             // $query_to_get_author_name = "SELECT username FROM user WHERE user_id = 300;";
@@ -70,29 +83,30 @@
             $recentPosts[] = array($row['post_id'], $row['post_name'] , $row['number_of_likes']
                                     , $row['number_of_comments'], $author_name);
         }
+
+        // get all bookmark posts
+        $limit = 5;
+        $i = 0;
+        while($row = mysqli_fetch_assoc($bookmark_data)) {
+            if($i == $limit) {
+                break;
+            }
+            $query_to_get_author_name = "SELECT username FROM user WHERE user_id = " . $row['user_id'] . ";";
+            $author_name_data = mysqli_query($conn, $query_to_get_author_name);
+            if(mysqli_num_rows($author_name_data) == 0)  {
+                array_push($errors, "Cannot get author name, user_id = " . $row['author_id'] . " doesn't exist in user table");
+                break;
+            }
+            $user_row = mysqli_fetch_assoc($author_name_data);
+            $author_name = $user_row['username'];
+            $bookmarked_posts[] = array($row['post_id'], $row['post_name'],
+                        $row['number_of_likes'], $row['number_of_comments'], true);
+            $i++;
+        }
     }
     
     // $bookmarked_posts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
     // if the user already logged in
-    $bookmarked_posts = array();
-    if(isset ($user)) {
-        $query_get_bookmark = "SELECT * FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
-                WHERE user_id = ". $user['user_id']. ");";
-        $bookmark_data = mysqli_query($conn, $query_get_bookmark);
-        if($bookmark_data || mysqli_num_rows($bookmark_data) > 0) {
-            $limit = 5;
-            $i = 0;
-            while($row = mysqli_fetch_assoc($bookmark_data)) {
-                if($i == $limit) {
-                    break;
-                }
-                $bookmarked_posts[] = array($row['post_id'], $row['post_name'],
-                            $row['number_of_likes'], $row['number_of_comments'], true);
-                $i++;
-            }
-
-        }
-    }
     include 'errors.php';
 ?>
 

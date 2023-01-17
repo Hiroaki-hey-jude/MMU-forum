@@ -36,7 +36,7 @@
                 <?php
                     // TODO: backend delete item, post, subcategory
                     // stopPropagation prevents triggering parent onclick
-                    if (!isset($admin))
+                    if (isset($admin))
                         echo '
                             <script>
                                 function onDelete() {

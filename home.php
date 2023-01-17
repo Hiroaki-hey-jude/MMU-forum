@@ -171,7 +171,7 @@
     </aside>
     <div id="home-container" class="page-container">
         <?php
-            if (!isset($admin)) {
+            if (isset($admin)) {
                 echo '
                     <script>
                         function onPressCreateCategory() {

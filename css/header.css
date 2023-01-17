@@ -60,13 +60,18 @@ header {
 
 /* USER */
 
-.header-user {
+.header-user,
+.header-menu {
   border-radius: 15px;
   width: 30px;
   height: 30px;
   align-items: center;
   justify-content: center;
   display: flex;
+  cursor: pointer;
+}
+
+.header-user {
   background-color: white;
 }
 
@@ -74,6 +79,22 @@ header {
   color: gray;
 }
 
-.header-user-name {
+.header-user-name,
+.header-menu {
   color: white;
+}
+
+.header-menu {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .search-bar,
+  .header-user-name,
+  .header-user {
+    display: none;
+  }
+  .header-menu {
+    display: flex;
+  }
 }

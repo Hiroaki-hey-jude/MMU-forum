@@ -15,11 +15,15 @@
 <head>
     <link rel="stylesheet" href="css/header.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function toggleNav() {
+            sidebarDisplay = document.getElementById("sidebar").style.display;
+            sidebarDisplay === "block"
+                ? document.getElementById("sidebar").style.display = "none"
+                : document.getElementById("sidebar").style.display = "block";
+        }
+    </script>
 </head>
-<!-- TODO:
-    - reponsive header
-    - login and sign in button
--->
 <body>
     <div class="header-div"></div>
     <header class="primary-background">
@@ -32,7 +36,6 @@
         <span class="header-span"></span>
         <form id="header-search-bar-form" class="search-bar" action="post-list.php">
             <input id="header-search-bar" class="search-input" type="text" name="search" placeholder="Search for post"/>
-            <!-- TODO: add search feature -->
             <a onclick="document.getElementById('header-search-bar-form').submit();"><span class="fas fa-search search-icon"></span></a>
         </form>
         <span style="flex: 1;"></span>
@@ -45,7 +48,7 @@
         ?>
         <span class="header-span"></span>
         <div class="header-user-name"><?php echo $user_data[1]; ?></div>
-        
+        <div class="header-menu" onclick="toggleNav()"><span class="fas fa-bars"></span></div>
     </header>
 </body>
 

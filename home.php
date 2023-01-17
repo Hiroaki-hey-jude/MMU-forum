@@ -118,6 +118,7 @@
                     include 'components/placeholder.php';
                 else
                     foreach($recentPosts as $post)
+                        $post_item_id = $post[0];
                         $post_item_type = "post";
                         $post_item_href = "post-details.php?id=".$post[0];
                         $post_item_title = $post[1];
@@ -137,6 +138,7 @@
                     include 'components/placeholder.php';
                 else 
                     foreach($bookmarked_posts as $post){
+                        $post_item_id = $post[0];
                         $post_item_type = "post";
                         $post_item_href = "post-details.php?id=".$post[0];
                         $post_item_title = $post[1];
@@ -167,6 +169,7 @@
                         include 'components/placeholder.php';
                     else
                         foreach($category[2] as $subcategory){
+                            $post_item_id = $subcategory[0];
                             $post_item_type = "subcategory";
                             $post_item_href = "post-list.php?id=".$subcategory[0]."&type=subcategory";
                             $post_item_title = $subcategory[1];

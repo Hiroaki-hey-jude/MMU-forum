@@ -33,7 +33,7 @@
                 <span style="flex: 1"></span>
                 <?php
                     if ($post_item_type === "post")
-                        `<div style="color: gray; font-size: small;">$post_item_author $post_item_createdAt</div>`;
+                        echo '<div style="color: gray; font-size: small;">'.$post_item_author.' '.$post_item_createdAt.'</div>';
                 ?>
             </div>
         </div>

@@ -26,11 +26,10 @@ To-do list:
 
 Memo:
 
-- [ ] Discussion on how to show/return success message
+- [x] Discussion on how to show/return success message
 	- [ ] Add success message in register.php
-	- [ ] Add success message in edit\_profile.php and show it in profile.php
-- [ ] Redirect to home.php in login.php (after a successful login)
-- [ ] Redirect to profile.php in edit\_profile.php 
+	- [x] Add success message in edit\_profile.php 
+- [x] Redirect to home.php in login.php (after a successful login)
 - [x] Create redirect.php (redirect to login.php if cookies is not presented)
 
 ### Frontend

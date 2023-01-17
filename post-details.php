@@ -2,6 +2,88 @@
 <html>
     <?php
         // TODO; llink backend
+        include "includes/session.php";
+        $errors = array();
+        $post_id = $_POST['id'];
+
+        $stmt = $conn->prepare("SELECT * FROM post WHERE post_id = ?;");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $post_data = $stmt->get_result();
+        
+        $comments = array();
+
+        $stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = ?;");
+        $stmt->bind_param("i", $post_id);
+        $stmt->execute();
+        $comments_data = $stmt->get_result();
+
+        if (!$post_data) {
+            array_push($errors, "This select post query is wrong");
+        } else {
+            $stmt = $mysqli->prepare("SELECT * FROM user WHERE user_id = (SELECT author_id FROM post WHERE post_id = ?);");
+            $stmt->bind_param("i", $post_id);
+            $stmt->execute();
+            $user_data = $stmt->get_result();
+        }
+        if (!$comments_data) {
+            array_push($errors, "This select comments query is wrong");
+        }
+        if (!$user_data) {
+            array_push($errors, "This select user query is wrong");
+        }
+
+        // If the user already logged in then check if he got bookmark this already or not
+        if (isset($user)) {
+            $stmt = $mysqli->prepare("SELECT * FROM bookmark WHERE post_id = ? AND user_id = ?;");
+            $stmt->bind_param("ii", $post_id, $user['user_id']);
+            $stmt->execute();
+            $bookmark_data = $stmt->get_result();
+
+            $stmt = $mysqli->prepare("SELECT * FROM `like` WHERE post_id = ? AND user_id = ?;");
+            $stmt->bind_param("ii", $post_id, $user['user_id']);
+            $stmt->execute();
+            $like_data = $stmt->get_result();
+        }
+
+        if (!$bookmark_data)
+            array_push($erros, "This select bookmark query is wrong");
+        if (!$like_data)
+            array_push($erros, "This select like query is wrong");
+
+        if(count($errors) == 0) {
+            $post_row = mysqli_fetch_assoc($post_data);
+            $title = $post_row["post_name"];
+            $image = $post_row["image_name"];
+            $description = $post_row["post_description"];
+            $noOfLikes = $post_row["number_of_likes"];
+            $noOfComments = $post_row["number_of_comments"];
+            // The user does not bookmark this page
+            if(mysqli_num_rows($bookmark_data) == 0) {
+                $isBookmarked = false;
+            } else {
+                $isBookmarked = true;
+                $bookmark_row = mysqli_fetch_assoc($bookmark_data);
+                $bookmark_id = $bookmark_row['bookmark_id'];
+            }
+
+            if(mysqli_num_rows($like_data) == 0) {
+                $isPostLiked = false;
+            } else {
+                $isPostLiked = true;
+                $like_row = mysqli_fetch_assoc($like_row);
+                $like_id = $like_row['like_id'];
+            }
+
+            if(mysqli_num_rows($comments_data) > 0) {
+                while ($comment_row = mysqli_fetch_assoc($comments_data)) {
+                    $comments[] = array($comment_row['comment_id'], $comment_row['comment_id'], 
+                    $comment_row['comment_id'], $comment_row['comment_id'], $comment_row['comment_id'], 
+                    $comment_row['comment_id'], $comment_row['comment_id']);
+                }
+            }
+        }
+
         $title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         $image = "https://i.imgur.com/AYk0AyG.png";
         $description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tristique velit nec ultricies efficitur. Vivamus dapibus erat metus. Vivamus sed porta augue. Curabitur pharetra facilisis feugiat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse eu pellentesque mauris. Integer at nibh quam. Proin enim lectus, cursus non augue vel, suscipit tincidunt mi. Aliquam tempus gravida felis, non volutpat ligula consectetur id. Nullam eu sapien pulvinar, interdum eros nec, molestie dui. Cras a eros ac arcu consequat laoreet. In semper massa purus. Etiam lacinia quis tellus tempor venenatis. Suspendisse nec elit quis eros tristique interdum.

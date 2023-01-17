@@ -42,7 +42,7 @@
                 $title = "All posts in ". $parentTitle . ":";
             }
         }
-        else if ($type == 'bookmark') {
+        else if (isset($user) && $type == 'bookmark') {
             $query_to_get_post_list = "SELECT `post_id`, `author_id`, `post_name`, `created_at`,
                 `number_of_comments`, `number_of_likes` FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
                 WHERE user_id = ". $user['user_id']. ");";
@@ -87,7 +87,7 @@
                 }
             }
         } else {
-            $title = "Error, there is no such type to be passed into post-list!";
+            $title = "No result!";
             array_push($errors, "Error, there is no such type to be passed into post-list!");
         }
         include('errors.php');
@@ -105,7 +105,7 @@
                     <?php echo $title ?>
                 </div>
                 <?php
-                    if (count($posts))
+                    if (count($posts) === 0)
                         include 'components/placeholder.php';
                     else
                         foreach($posts as $item){

@@ -2,7 +2,7 @@
 <html>
     <?php
     // include 'includes/session.php';
-        $test = $_SERVER['REQUEST_URI'];
+        $page_uri = $_SERVER['REQUEST_URI'];
         $options[] = array("home", "Home", "home", "home.php");
         if (isset($user)) {
             $options[] = array("profile", "Profile", "user", "edit-profile.php");
@@ -39,8 +39,8 @@
                 echo '
                 <a href="'.$option[3].'">
                     <div class="sidebar-button';
-                
-                if(str_contains($test, $option[3]))
+
+                if (str_contains($page_uri, $option[3]))
                     echo ' sidebar-button-selected ';
                 if ($option[0] == "logout" || $option[0] == "login" || $option[0] == "register")
                     echo ' logout-button';

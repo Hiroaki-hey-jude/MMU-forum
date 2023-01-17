@@ -18,7 +18,7 @@
                         <input type="password" name="password1" required placeholder="enter your password">
                         <input type="password" name="password2" required placeholder="confirm your password">
                         <input type="submit" name="submit" class="reg-button">
-                        <p>already have an account? <a href="login_form.php">login now</a></p>
+                        <p>already have an account? <a href="login.php">login now</a></p>
                 </form>
         </div>
 </body>

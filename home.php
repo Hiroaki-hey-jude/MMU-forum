@@ -116,6 +116,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/admin.css" />
 </head>
 
 <body>
@@ -170,6 +171,20 @@
     </aside>
     <div id="home-container" class="page-container">
         <?php
+            if (!isset($admin)) {
+                echo '
+                    <script>
+                        function onPressCreateCategory() {
+                            location.href = "create-form.php?type=category";
+                        }
+                    </script>
+                    <div class="create-category-button" onclick="onPressCreateCategory()">
+                        <span class="fas fa-plus" style="margin-right: 0.5em;"></span>
+                        Create new category
+                    </div>
+                ';
+            }
+
             if (empty($categories)) 
                 include 'components/placeholder.php';
             else if (count($categories) === 0)

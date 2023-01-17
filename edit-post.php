@@ -3,7 +3,6 @@
     <?php
         $fieldKeys = [];
         $type = $_GET["type"];
-        $type = "post";
         $defaultTitle = "Default Title" ?? "";
         $defaultDescription = "Default Description" ?? "";
         $defaultCategory = array(123, "FCI");

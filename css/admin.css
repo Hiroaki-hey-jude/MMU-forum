@@ -6,7 +6,7 @@
 }
 
 .edit-form-container {
-  margin: 0 2em 2em;
+  margin: 2em;
   padding: 2em;
   background-color: white;
   box-shadow: 0 0 1px gray;
@@ -39,8 +39,11 @@
 .form-cancel-button {
   margin-left: 1em;
   width: 6em;
-  height: 2em;
+  height: 2.5em;
   border: 2px solid var(--primary-color);
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .form-cancel-button {

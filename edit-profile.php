@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Edit Profile</title>
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/header.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="edit-profile-body">
 	<?php 
 		include 'includes/redirect.php';
 	?>
+	<?php include "components/header.php" ?>
 	
     <div class="wrapper">
         <div class="edit-profile">

@@ -95,7 +95,6 @@
     <head>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/global.css" />
-        <script src="components/post-item.js"></script>
     </head>
     <body>
         <?php include "components/header.php" ?>
@@ -110,15 +109,13 @@
                         include 'components/placeholder.php';
                     else
                         foreach($posts as $item){
-                            echo '
-                                <post-item
-                                    href="post-details.php?id='.$item[0].'"
-                                    title="'.$item[1].'"
-                                    likes="'.$item[2].'"
-                                    comments="'.$item[3].'"
-                                    author="'.$item[4].'"
-                                    createdAt="'.$item[5].'"
-                                />';
+                            $post_item_href = "post-details.php?id=".$item[0];
+                            $post_item_title = $item[1];
+                            $post_item_noOfLikes = $item[2];
+                            $post_item_noOfComments = $item[3];
+                            $post_item_author = $item[4];
+                            $post_item_createdAt = $item[5];
+                            include "components/post-item.php";
                         }
                 ?>
             </div>

@@ -82,8 +82,6 @@ $subcategories =  json_encode($subcategories);
     <link rel="stylesheet" href="css/reset.css" />
 </head>
 <body style="background-color: #dae0e6;">
-<?php include "components/header.php" ?>
-<?php include "components/sidebar.php" ?>
     <div id="advanced-search-container" class="advanced-search-container">
         <form action="" method="post">
             <section class="panel">

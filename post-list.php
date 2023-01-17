@@ -100,6 +100,7 @@
     <body>
         <?php include "components/header.php" ?>
         <?php include "components/sidebar.php" ?>
+        <?php include "components/advanced-search.php" ?>
         <div class="page-container">
             <div class="post-list">
                 <div class="list-title primary-background">

@@ -116,7 +116,6 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/home.css" />
-    <script src="components/post-item.js"></script>
 </head>
 
 <body>
@@ -133,15 +132,13 @@
                     include 'components/placeholder.php';
                 else
                     foreach($recentPosts as $post)
-                        echo '
-                            <post-item
-                                type="post"
-                                href="post-details.php?id='.$post[0].'"
-                                title="'.$post[1].'"
-                                likes="'.$post[2].'"
-                                comments="'.$post[3].'"
-                                author="'.$post[4].'"
-                            />';
+                        $post_item_type = "post";
+                        $post_item_href = "post-details.php?id=".$post[0];
+                        $post_item_title = $post[1];
+                        $post_item_noOfLikes = $post[2];
+                        $post_item_noOfComments = $post[3];
+                        $post_item_author = $post[4];
+                        include "components/post-item.php";
             ?>
         </div>
         <div class="post-list bookmark-list">
@@ -154,15 +151,13 @@
                     include 'components/placeholder.php';
                 else 
                     foreach($bookmarked_posts as $post){
-                        echo '
-                            <post-item
-                                type="post"
-                                href="post-details.php?id='.$post[0].'"
-                                title="'.$post[1].'"
-                                posts="'.$post[2].'"
-                                comments="'.$post[3].'"
-                                bookmarked="'.$post[4].'"
-                            />';
+                        $post_item_type = "post";
+                        $post_item_href = "post-details.php?id=".$post[0];
+                        $post_item_title = $post[1];
+                        $post_item_noOfLikes = $post[2];
+                        $post_item_noOfComments = $post[3];
+                        $post_item_bookmarked = $post[4];
+                        include "components/post-item.php";
                     }
             ?>
         </div>
@@ -186,14 +181,12 @@
                         include 'components/placeholder.php';
                     else
                         foreach($category[2] as $subcategory){
-                            echo '
-                                <post-item
-                                    type="subcategory"
-                                    href="post-list.php?id='.$subcategory[0].'&type=subcategory" 
-                                    title="'.$subcategory[1].'"
-                                    posts="'.$subcategory[2].'"
-                                    comments="'.$subcategory[3].'"
-                                />';
+                            $post_item_type = "subcategory";
+                            $post_item_href = "post-list.php?id=".$subcategory[0]."&type=subcategory";
+                            $post_item_title = $subcategory[1];
+                            $post_item_noOfPosts = $subcategory[2];
+                            $post_item_noOfComments = $subcategory[3];
+                            include "components/post-item.php";
                         }
                     
                     echo '

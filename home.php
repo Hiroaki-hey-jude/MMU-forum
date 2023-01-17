@@ -128,7 +128,9 @@
                 <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
-                if (count($recentPosts) === 0)
+                if (empty($recentPosts)) 
+                    include 'components/placeholder.php';
+                else if (count($recentPosts) === 0)
                     include 'components/placeholder.php';
                 else
                     foreach($recentPosts as $post)
@@ -148,7 +150,9 @@
                 <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
-                if (count($bookmarked_posts) === 0)
+                if (empty($bookmarked_posts)) 
+                    include 'components/placeholder.php';
+                else if (count($bookmarked_posts) === 0)
                     include 'components/placeholder.php';
                 else 
                     foreach($bookmarked_posts as $post){
@@ -166,7 +170,9 @@
     </aside>
     <div id="home-container" class="page-container">
         <?php
-            if (count($categories) === 0)
+            if (empty($categories)) 
+                include 'components/placeholder.php';
+            else if (count($categories) === 0)
                 include 'components/placeholder.php';
             else
                 foreach ($categories as $category) {

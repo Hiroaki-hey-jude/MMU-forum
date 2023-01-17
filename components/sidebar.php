@@ -4,16 +4,36 @@
     // include 'includes/session.php';
         $test = $_SERVER['REQUEST_URI'];
         $options[] = array("home", "Home", "home", "home.php");
-        $options[] = array("profile", "Profile", "user", "edit-profile.php");
-        $options[] = array("logout", "Log out", "door-open", "logout.php");
-        $lastOption = end($options);
+        if (isset($user)) {
+            $options[] = array("profile", "Profile", "user", "edit-profile.php");
+            $options[] = array("logout", "Log out", "door-open", "logout.php");
+        }
+        else {
+            $options[] = array("login", "Log in", "key", "login.php");
+            $options[] = array("register", "Sign up", "plus", "register.php");
+        }
+            $lastOption = end($options);
     ?>
     <head>
         <link rel="stylesheet" href="css/sidebar.css" />
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener('resize', function(event) {
+                const curWidth = event.target.innerWidth;
+                if (curWidth > 600) {
+                    document.getElementById("sidebar").style.width = "10em";
+                    document.getElementById("sidebar").style.display = "block";
+                } else {
+                    document.getElementById("sidebar").style.width = "100%";
+                }
+            });
+        </script>
     </head>
     <body>
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar">
+        <form id="sidebar-search-bar-form" class="sidebar-search-bar" action="post-list.php">
+            <input class="sidebar-search-input" type="text" name="search" placeholder="Search for post"/>
+        </form>
         <?php
             foreach ($options as $option) {
                 echo '
@@ -22,7 +42,7 @@
                 
                 if(str_contains($test, $option[3]))
                     echo ' sidebar-button-selected ';
-                if ($option[0] == "logout")
+                if ($option[0] == "logout" || $option[0] == "login" || $option[0] == "register")
                     echo ' logout-button';
                 
                 echo '">

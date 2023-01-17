@@ -62,23 +62,23 @@
         <?php include "components/sidebar.php" ?>
         <div class="page-container">
             <form class="edit-form-container" method="post">
-                <h2 class="edit-post-title">Edit <?php echo ucfirst($type);?></h2>
+                <h2 class="edit-form-title">Edit <?php echo ucfirst($type);?></h2>
                 <?php
                     foreach ($fieldKeys as $key) {
                         if ($key === "title") 
                             echo '
-                            <label class="edit-post-label">Title</label>
-                            <input class="edit-post-input" name="title" type="text" required placeholder="Enter title" value="'.$defaultTitle.'"/>
+                            <label class="edit-form-label">Title</label>
+                            <input class="edit-form-input" name="title" type="text" required placeholder="Enter title" value="'.$defaultTitle.'"/>
                             ';
                         if ($key === "description") 
                             echo '
-                            <label class="edit-post-label">Description</label>
-                            <input class="edit-post-input" name="description" type="text" required placeholder="Enter description" value="'.$defaultDescription.'"/>
+                            <label class="edit-form-label">Description</label>
+                            <input class="edit-form-input" name="description" type="text" required placeholder="Enter description" value="'.$defaultDescription.'"/>
                             ';
                         if ($key === "category") {
                             echo '
-                            <label class="edit-post-label">Category</label>
-                            <select class="edit-post-input" name="category" id="category" required onchange="onChangeSubCategory()">
+                            <label class="edit-form-label">Category</label>
+                            <select class="edit-form-input" name="category" id="category" required onchange="onChangeSubCategory()">
                             ';
                             foreach ($categories as $category) {
                                 echo '<option value="'.$category[0].'">'.$category[1].'</option>';
@@ -88,8 +88,8 @@
                         }
                         if ($key === "subcategory") {
                             echo '
-                            <label class="edit-post-label">Subcategory</label>
-                            <select class="edit-post-input" name="subcategory" id="subcategory" required>
+                            <label class="edit-form-label">Subcategory</label>
+                            <select class="edit-form-input" name="subcategory" id="subcategory" required>
                             ';
                             foreach ($subcategories_clone as $subcategory) {
                                 echo '<option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>';
@@ -99,7 +99,7 @@
                         }
                         if($key === "comments") {
                             echo '
-                                <label class="edit-post-label">Comments</label>
+                                <label class="edit-form-label">Comments</label>
                                 <section class="post-comments">
                             ';
                             if (count($comments) === 0)

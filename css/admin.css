@@ -1,6 +1,6 @@
 @import "theme.css";
 
-.edit-post-title {
+.edit-form-title {
   font-size: x-large;
   margin-bottom: 0.5em;
 }
@@ -14,11 +14,11 @@
   flex-direction: column;
 }
 
-.edit-post-label {
+.edit-form-label {
   margin: 0.5em 0;
 }
 
-.edit-post-input {
+.edit-form-input {
   padding: 0.5em;
   background-color: white;
   border: 1px solid lightgray;

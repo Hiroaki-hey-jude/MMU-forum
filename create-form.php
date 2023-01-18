@@ -178,7 +178,22 @@
 						echo '<script>alert("Successfully added the category!")</script>';
 					}
 				}
+				elseif ($_GET['type'] === "subcategory") {
+					$new_subcategory = $_POST['title'];
+					$category_id = $_POST['category'];
+					if(empty($new_subcategory) || empty($category_id)) {
+						array_push($errors, "Missing parameter! You must submit the new subcategory name.");
+					}
+					if (count($errors) == 0) {
+						$stmt = $conn->prepare("INSERT INTO subcategory (subcategory_name, category_id) VALUES (?,?)"); 
+						$stmt->bind_param("si", $new_subcategory, $category_id);
+						$stmt->execute();
+						echo '<script>alert("Successfully added the subcategory!")</script>';
+					}
+				}
+
 			}
+
 			include 'errors.php';
 		?>
                 <div class="form-submit-container">

@@ -4,15 +4,21 @@
     // include 'includes/session.php';
         $page_uri = $_SERVER['REQUEST_URI'];
         $options[] = array("home", "Home", "home", "home.php");
+        $options[] = array("createPost", "Post", "plus", "create-post.php");
         if (isset($user)) {
             $options[] = array("profile", "Profile", "user", "edit-profile.php");
-            $options[] = array("logout", "Log out", "door-open", "logout.php");
-        }
+        } else if (isset($admin)) {
+        $options[] = array("createCategory", "Category", "plus", "create-form.php?type=category");
+        $options[] = array("createSubcategory", "Subcategory", "plus", "create-form.php?type=subcategory");
+    }
         else {
             $options[] = array("login", "Log in", "key", "login.php");
             $options[] = array("register", "Sign up", "plus", "register.php");
         }
-            $lastOption = end($options);
+        if (isset($user) || isset($admin)) {
+            $options[] = array("logout", "Log out", "door-open", "logout.php");
+        }
+        $lastOption = end($options);
     ?>
     <head>
         <link rel="stylesheet" href="css/sidebar.css" />

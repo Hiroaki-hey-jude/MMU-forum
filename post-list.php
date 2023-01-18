@@ -109,6 +109,7 @@
                         include 'components/placeholder.php';
                     else
                         foreach($posts as $item){
+                            $post_item_id = $item[0];
                             $post_item_href = "post-details.php?id=".$item[0];
                             $post_item_title = $item[1];
                             $post_item_noOfLikes = $item[2];

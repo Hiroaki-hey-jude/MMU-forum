@@ -121,6 +121,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/admin.css" />
 </head>
 
 <body>
@@ -133,10 +134,13 @@
                 <a class="view-all" href="post-list.php?type=recent">View All</a>
             </div>
             <?php
-                if (count($recentPosts) === 0)
+                if (empty($recentPosts)) 
+                    include 'components/placeholder.php';
+                else if (count($recentPosts) === 0)
                     include 'components/placeholder.php';
                 else {
                     foreach($recentPosts as $post)
+                        $post_item_id = $post[0];
                         $post_item_type = "post";
                         $post_item_href = "post-details.php?id=".$post[0];
                         $post_item_title = $post[1];
@@ -154,10 +158,13 @@
                 <a class="view-all" href="post-list.php?type=bookmark">View All</a>
             </div>
             <?php
-                if (count($bookmarked_posts) === 0)
+                if (empty($bookmarked_posts)) 
+                    include 'components/placeholder.php';
+                else if (count($bookmarked_posts) === 0)
                     include 'components/placeholder.php';
                 else 
                     foreach($bookmarked_posts as $post){
+                        $post_item_id = $post[0];
                         $post_item_type = "post";
                         $post_item_href = "post-details.php?id=".$post[0];
                         $post_item_title = $post[1];
@@ -172,7 +179,23 @@
     </aside>
     <div id="home-container" class="page-container">
         <?php
-            if (count($categories) === 0)
+            if (isset($admin)) {
+                echo '
+                    <script>
+                        function onPressCreateCategory() {
+                            location.href = "create-form.php?type=category";
+                        }
+                    </script>
+                    <div class="create-category-button" onclick="onPressCreateCategory()">
+                        <span class="fas fa-plus" style="margin-right: 0.5em;"></span>
+                        Create new category
+                    </div>
+                ';
+            }
+
+            if (empty($categories)) 
+                include 'components/placeholder.php';
+            else if (count($categories) === 0)
                 include 'components/placeholder.php';
             else
                 foreach ($categories as $category) {
@@ -189,6 +212,7 @@
                         include 'components/placeholder.php';
                     else
                         foreach($category[2] as $subcategory){
+                            $post_item_id = $subcategory[0];
                             $post_item_type = "subcategory";
                             $post_item_href = "post-list.php?id=".$subcategory[0]."&type=subcategory";
                             $post_item_title = $subcategory[1];

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 09:23 AM
+-- Generation Time: Jan 18, 2023 at 09:47 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `forum`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(6) UNSIGNED NOT NULL,
+  `admin_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `admin_pass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `admin_pass`) VALUES
+(1, 'admin1', 'admin1@admin.com', 'admin1'),
+(2, 'admin2', 'admin2@admin.com', 'admin2'),
+(3, 'admin3', 'admin3@admin.com', 'admin3');
 
 -- --------------------------------------------------------
 
@@ -13698,7 +13720,6 @@ INSERT INTO `like` (`like_id`, `user_id`, `post_id`, `comment_id`) VALUES
 (9940, 184, 379, 1611),
 (9962, 2, 2, NULL),
 (9976, 2, 2, 541),
-(9980, 202, 1, NULL),
 (9981, 202, 1, 1713),
 (9983, 203, 1, NULL),
 (9985, 202, 4, NULL);
@@ -13751,7 +13772,7 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`post_id`, `author_id`, `subcategory_id`, `post_name`, `post_description`, `image_name`, `created_at`, `modified_at`, `number_of_comments`, `number_of_likes`) VALUES
-(1, 160, 1, 'This is example post number 0 in Annoucement', 'Description of <br>the post : This is example post number 0 in Annoucement', 'https://i.imgur.com/0nuXHck.jpeg', '2023-01-09 17:12:21', '2023-01-18 08:22:20', 8, 2),
+(1, 160, 1, 'This is example post number 0 in Annoucement', 'Description of <br>the post : This is example post number 0 in Annoucement', 'https://i.imgur.com/0nuXHck.jpeg', '2023-01-09 17:12:21', '2023-01-18 08:37:25', 8, 1),
 (2, 134, 1, 'This is example post number 1 in Annoucement', 'Description of the post : This is example post number 1 in Annoucement', 'https://i.imgur.com/BWpl46Q.jpeg', '2023-01-09 17:12:21', '2023-01-18 08:22:02', 2, 1),
 (3, 18, 1, 'This is example post number 2 in Annoucement', 'Description of the post : This is example post number 2 in Annoucement', 'https://i.imgur.com/f2P6IWu.jpeg', '2023-01-09 17:12:21', '2023-01-18 08:23:17', 0, 0),
 (4, 45, 1, 'This is example post number 3 in Annoucement', 'Description of the post : This is example post number 3 in Annoucement', 'https://i.imgur.com/LJiAf4A.jpeg', '2023-01-09 17:12:21', '2023-01-18 08:22:32', 3, 3),
@@ -15122,6 +15143,12 @@ INSERT INTO `user` (`user_id`, `username`, `email`, `user_pass`, `profile_pic_na
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
 -- Indexes for table `bookmark`
 --
 ALTER TABLE `bookmark`
@@ -15178,10 +15205,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `bookmark`
 --
 ALTER TABLE `bookmark`
-  MODIFY `bookmark_id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=612;
+  MODIFY `bookmark_id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=614;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -15199,7 +15232,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `like`
 --
 ALTER TABLE `like`
-  MODIFY `like_id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9987;
+  MODIFY `like_id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9988;
 
 --
 -- AUTO_INCREMENT for table `post`

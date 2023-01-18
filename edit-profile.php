@@ -17,7 +17,6 @@
 			header('location: login.php');
 		}
 	?>
-	<?php include "components/header.php" ?>
 	
     <div class="wrapper">
         <div class="edit-profile">
@@ -28,7 +27,7 @@
         <form action="edit-profile.php" method="post" enctype="multipart/form-data">
             <div class="input-box">
                 <label for="username" style="font-size: 1.2em;">Username</label>
-		<input type="text" name="username" value="<?php echo $user['username'] ?>"> 
+		<input type="text" minlength="2" name="username" value="<?php echo $user['username'] ?>"> 
             </div>
             <div class="input-box">
                 <label for="email" style="font-size: 1.2em;">Email Address</label>
@@ -37,7 +36,7 @@
             <div class="input-box">
                 <label for="password1" style="font-size: 1.2em;">New Password</label>
                 <!-- placeholder will be the user's infomation -->
-                <input type="password" name="password1" placeholder="Optional">
+                <input type="password" minlength="6" name="password1" placeholder="Optional">
             </div>
             <div class="input-box">
                 <label for="password2" style="font-size: 1.2em;">Confirm New Password</label>

@@ -12,8 +12,6 @@
     else {
         $user_data = array("-1", "Guest");
     }
-
-    $websiteImage = parse_url($_SERVER['HTTP_HOST'].strstr($_SERVER['PHP_SELF'], "webapp-forum", true)."webapp-forum/images/MMU.png", PHP_URL_PATH);
 ?>
 
 <head>

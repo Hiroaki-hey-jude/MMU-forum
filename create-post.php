@@ -127,9 +127,9 @@ include 'errors.php';
                     </select>
                 </div>
             </div>
-            <input class="title-input" type="text" name="title" required placeholder="Enter Title">
+            <input minlength="5" class="title-input" type="text" name="title" required placeholder="Enter Title">
             <input class="image-input" type="text" name="image" required placeholder="Put image link">
-            <textarea name="description" id="" cols="30" rows="20" placeholder="Enter Description"></textarea>
+            <textarea name="description" id="" cols="30" rows="20" required placeholder="Enter Description"></textarea>
             <div align="right" class="post-submit-button" id="text-area">
                 <input type="submit" id="submit_btn" name="submit">
             </div>

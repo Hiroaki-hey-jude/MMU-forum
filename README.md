@@ -31,7 +31,7 @@ To-do list:
 	- [ ] Delete category
 	- [x] Add subcategory
 	- [ ] Delete subcategory
-	- [ ] Manage post
+	- [x] Manage post
 	- [ ] Manage user
 	
 

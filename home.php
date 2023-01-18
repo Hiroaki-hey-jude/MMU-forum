@@ -138,7 +138,7 @@
                 else if (count($recentPosts) === 0)
                     include 'components/placeholder.php';
                 else {
-                    foreach($recentPosts as $post)
+                    foreach($recentPosts as $post){
                         $post_item_id = $post[0];
                         $post_item_type = "post";
                         $post_item_href = "post-details.php?id=".$post[0];
@@ -147,6 +147,7 @@
                         $post_item_noOfComments = $post[3];
                         $post_item_author = $post[4];
                         include "components/post-item.php";
+                        }
                     }
             ?>
 

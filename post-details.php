@@ -181,7 +181,7 @@
             <article class="post-header">
                 <h2 class="post-title"><?php echo $title; ?></h2>
                 <div class="post-author"><img class="post-author-image" src="images/<?php echo $authorImage ?>" /><?php echo $authorName ?>, <?php echo $createdAt ?></div>
-                <img class="post-image" src="images/<?php echo $image; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>" />
+                <img class="post-image" src="<?php echo $image; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>" />
                 <p class="post-description"><?php echo $description; ?></p>
             </article>
             <section class="post-actions">

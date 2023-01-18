@@ -27,8 +27,10 @@ To-do list:
 - [x] Create admin-login.php
 - [ ] Admin functions
 	- [x] Login
-	- [ ] Manage category
-	- [ ] Manage subcategory
+	- [x] Add category
+	- [ ] Delete category
+	- [x] Add subcategory
+	- [ ] Delete subcategory
 	- [ ] Manage post
 	- [ ] Manage user
 	

@@ -26,6 +26,10 @@ To-do list:
 - [x] Create post function
 - [x] Create admin-login.php
 - [ ] Admin functions
+	- [ ] Manage category
+	- [ ] Manage subcategory
+	- [ ] Manage post
+	- [ ] Manage user
 
 To-be fixed:
 

@@ -6,7 +6,10 @@
     // include "includes/session.php";
     if (isset($user)) {
         $user_data = array($user['user_id'], $user['username'], "images/".$user['profile_pic_name']);
-    } else {
+    } else if (isset($admin)) {
+    $user_data = array($admin['admin_id'], $admin['admin_name']);
+    }
+    else {
         $user_data = array("-1", "Guest");
     }
 

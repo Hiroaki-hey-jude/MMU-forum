@@ -11,7 +11,7 @@
         } else {
             $type = null;
         }
-        if(isset($_GET['id']) && ($type == 'category' || $type == 'subcategory')) {
+        if(isset($_GET['id']) && ($type == 'category' || $type == 'subcategory') && !($type == 'advancedsearch')) {
             $id = $_GET['id'];
             // check which type does it belong to, to determine the query
             if($_GET['type'] == 'category') {
@@ -61,7 +61,20 @@
             $query_to_get_post_list = "SELECT `post_id`, `author_id`, `post_name`, `created_at`,
                             `number_of_comments`, `number_of_likes` FROM post 
                              WHERE post_name LIKE '%" . $search_keyword . "%' ;";
-        } else {
+        } else if($type == 'advancedSearch'){
+            $search_keyword = $_GET["keyword="];
+            $category_id = $_GET["category="];
+            $subcategory_id = $_GET["subcategory="];
+            $title = $_GET["title="];
+            $description = $_GET["desc="];
+
+            $title = "Search result of: ". $search_keyword;
+            // $category_id = $_GET['filter'];
+            $query_to_get_post_list = "SELECT `post_id`, `author_id`, `post_name`, `created_at`,
+                            `number_of_comments`, `number_of_likes` FROM post 
+                             WHERE post_name LIKE '%" . $search_keyword . "%' ;";
+        }
+         else {
             array_push($errors, "There is no such type of post list");
         }
 

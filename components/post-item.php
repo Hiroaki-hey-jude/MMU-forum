@@ -41,7 +41,7 @@
                             <script>
                                 function onDelete() {
                                     event.stopPropagation();
-                                    if (window.confirm("Are you sure?"))
+                                    if (window.confirm("Are you sure to delete post id: '. $post_item_id .'?"))
                                         location.href = "delete-post.php?id='.$post_item_id.'";
                                 }
                             </script>

@@ -1,10 +1,9 @@
 <?php
 $errors = array();
 include 'includes/session.php';
-    if(isset($user)) {
+    if(isset($user) || isset($admin)) {
         session_destroy();
     }
     header("Location: login.php");
-    include 'errors.php';
     exit;
 ?>

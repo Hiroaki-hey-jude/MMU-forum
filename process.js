@@ -2,7 +2,7 @@ function process_like (ids) {
     user_id = ids[0];
     post_id = ids[1];
     comment_id = ids[2];
-    
+
     if(user_id == null) {
         window.alert("Please log in first");
     } else {
@@ -72,7 +72,7 @@ function process_comment(ids) {
                 var response = xhr.responseText;
                 if(response === 'success'){
                     // alert('Comment successfully');
-                    window.location.href = "http://localhost/webapp-forum/post-details.php?id=" + post_id;
+                    location.reload();
                 }
                 else if(response === 'error'){
                     alert('Error');

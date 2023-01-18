@@ -6,7 +6,6 @@
     $errors = array();
 
     $categories = array();
-    $subcategories = array();
 
     $category_table_data = array();
     $query_get_all_categories = "SELECT * FROM category;";
@@ -56,7 +55,7 @@
         }
         // populate the data into $categories array
         for ($i = 0; $i < count($category_table_data); $i++) {
-
+            $subcategories = array();
             for($j = 0; $j < count($subcategory_table_data); $j++) {
                 if($category_table_data[$i]['category_id'] == $subcategory_table_data[$j]['category_id']) {
                     $subcategories[] = array(

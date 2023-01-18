@@ -21,7 +21,6 @@
                         <p>already have an account? <a href="login.php">login now</a></p>
                         <p>or</p>
                         <p><a href="home.php">continue as a guest</a></p>
-
                 </form>
         </div>
 </body>

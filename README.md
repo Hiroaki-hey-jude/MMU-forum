@@ -17,9 +17,10 @@ To-do list:
 	- [x] view categories
 	- [x] view sub-categories
 	- [x] view post list
-- [ ] View posts' details 	
-	- [ ] upvoting
-	- [ ] post comment
+- [x] View posts' details 	
+	- [x] upvoting
+	- [x] post comment
+	- [x] bookmark
 	- [ ] report post or comment
 	- [ ] share post (generate URL)
 - [x] Create post function
@@ -31,7 +32,7 @@ Memo:
 	- [x] Add success message in edit\_profile.php 
 	- [x] Add success message in create\_post.php 
 - [x] Create redirect.php (redirect to login.php if cookies is not presented)
-- [ ] In home.php, redirect the user to profile.php instead of edit-profile.php after clicking profile buttons
+- [x] In home.php, redirect the user to profile.php instead of edit-profile.php after clicking profile buttons
 
 ### Frontend
 

@@ -15,7 +15,7 @@
 
 <head>
     <link rel="stylesheet" href="css/header.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
     <script>
         function toggleNav() {
             sidebarDisplay = document.getElementById("sidebar").style.display;

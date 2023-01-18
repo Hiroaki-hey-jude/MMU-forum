@@ -23,7 +23,7 @@
     ?>
     <head>
         <link rel="stylesheet" href="css/sidebar.css" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
         <script>
             window.addEventListener('resize', function(event) {
                 const curWidth = event.target.innerWidth;

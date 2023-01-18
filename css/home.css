@@ -1,17 +1,5 @@
 @import "theme.css";
 
-@media screen and (min-width: 850px) {
-  #home-container {
-    margin-right: var(--right-width);
-  }
-}
-
-@media screen and (max-width: 850px) {
-  #right-pane {
-    display: none;
-  }
-}
-
 #right-pane {
   float: right;
   width: var(--right-width);
@@ -29,4 +17,18 @@
   font-size: small;
   text-decoration: none;
   color: white;
+}
+
+@media screen and (min-width: 850px) {
+  #home-container {
+    margin-right: var(--right-width);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #right-pane {
+    float: none;
+    width: 100%;
+    margin-top: 1em;
+  }
 }

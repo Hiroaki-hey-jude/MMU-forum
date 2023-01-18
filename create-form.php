@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html>
     <?php
+	include "includes/session.php";
+        include "includes/permission.php";
         $fieldKeys = [];
         $type = $_GET["type"];
 
-        $categories[] = array(121, "Announcement");
-        $categories[] = array(122, "FCM");
-        $categories[] = array(123, "FCI");
-        $subcategories[] = array(221, "Academic Calendar", 121);
-        $subcategories[] = array(224, "Holiday", 121);
-        $subcategories[] = array(222, "Academic Calendar FCM", 122);
-        $subcategories[] = array(223, "Academic Calendar FCI", 123);
+	$errors = array();
+	
+	$categories = array();
+	$query_get_all_categories = "SELECT * FROM category;";
+	$category_result = mysqli_query($conn, $query_get_all_categories);
+	
+	if (!$category_result) {
+		array_push($errors, "Cannot select category from table");
+	}
+	
+	$subcategories = array();
+	$query_get_all_subcategories = "SELECT * FROM subcategory;";
+	$subcategory_result = mysqli_query($conn, $query_get_all_subcategories);
+	
+	if(!$subcategory_result) {
+	    array_push($errors, "Cannot select subcategory from table");
+	}
+	
+	if (count($errors) == 0) {
+		while ($row = mysqli_fetch_assoc($category_result)) {
+			$categories[] = array($row['category_id'], $row['category_name']);
+		}
+		while ($row = mysqli_fetch_assoc($subcategory_result)) {
+			$subcategories[] = array(
+					$row['subcategory_id'],
+					$row['subcategory_name'],
+					$row['category_id'],
+					$row['number_of_posts'],
+					$row['number_of_comments']
+			);
+		}
+	}
+	
+	include 'errors.php';
 
         if ($type === "category") {
             $fieldKeys = array("title");
@@ -133,6 +162,40 @@
                         }
                     }
                 ?>
+
+		<?php
+			$errors = array();
+			if (isset($_POST['Submit']) && isset($_GET['type'])) {
+				if ($_GET['type'] === "category") {
+					$new_category = $_POST['title'];
+					if(empty($new_category)) {
+						array_push($errors, "Missing parameter! You must submit the new category name.");
+					}
+					if (count($errors) == 0) {
+						$stmt = $conn->prepare("INSERT INTO category (category_name) VALUES (?)"); 
+						$stmt->bind_param("s", $new_category);
+						$stmt->execute();
+						echo '<script>alert("Successfully added the category!")</script>';
+					}
+				}
+				elseif ($_GET['type'] === "subcategory") {
+					$new_subcategory = $_POST['title'];
+					$category_id = $_POST['category'];
+					if(empty($new_subcategory) || empty($category_id)) {
+						array_push($errors, "Missing parameter! You must submit the new subcategory name.");
+					}
+					if (count($errors) == 0) {
+						$stmt = $conn->prepare("INSERT INTO subcategory (subcategory_name, category_id) VALUES (?,?)"); 
+						$stmt->bind_param("si", $new_subcategory, $category_id);
+						$stmt->execute();
+						echo '<script>alert("Successfully added the subcategory!")</script>';
+					}
+				}
+
+			}
+
+			include 'errors.php';
+		?>
                 <div class="form-submit-container">
                     <input class="form-submit-button" type="submit" name="Submit" />
                 </div>
@@ -140,3 +203,4 @@
         </div>
     </body>
 </html>
+

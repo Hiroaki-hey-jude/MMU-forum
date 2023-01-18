@@ -79,14 +79,13 @@ $subcategories =  json_encode($subcategories);
     <title>Document</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/advanced-search.css">
-    <link rel="stylesheet" href="css/reset.css" />
 </head>
-<body style="background-color: #dae0e6;">
+<body>
     <div id="advanced-search-container" class="advanced-search-container">
         <form action="" method="post">
             <section class="panel">
                 <input id="block-01" type="checkbox" class="toggle">
-                <label class="Label" for="block-01">advanced search</label>
+                <label class="Label" for="block-01">Advanced search</label>
                     <div class="content">
                     <input class="advancedsearch" type="text" name="advancedsearch" required placeholder="advanced search">
                             <div class="category">
@@ -132,17 +131,11 @@ $subcategories =  json_encode($subcategories);
 </body>
 <script>
     let subcategoriesFromPHP = JSON.parse('<?php echo $subcategories; ?>');
-    //console.log('typeof: ' + typeof subcategoriesFromPHP);
-    for (let i = 0; i < subcategoriesFromPHP.length; i++) {
-        console.log('value: ' + subcategoriesFromPHP[i]);
-    }
     function changeSubCategory() {
         let selectedCategoryIndex = document.getElementById('category-names').value;
 
-        console.log(selectedCategoryIndex);
         for(let i = 0; i < subcategoriesFromPHP.length; i++) {
             if(selectedCategoryIndex != subcategoriesFromPHP[i][2]) {
-                console.log(subcategoriesFromPHP[i][1]);
                 document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "none";
             } else {
                 document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "block";

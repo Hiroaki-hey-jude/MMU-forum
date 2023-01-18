@@ -42,7 +42,7 @@
                 $title = "All posts in ". $parentTitle . ":";
             }
         }
-        else if ($type == 'bookmark') {
+        else if (isset($user) && $type == 'bookmark') {
             $query_to_get_post_list = "SELECT `post_id`, `author_id`, `post_name`, `created_at`,
                 `number_of_comments`, `number_of_likes` FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
                 WHERE user_id = ". $user['user_id']. ");";
@@ -87,15 +87,14 @@
                 }
             }
         } else {
-            $title = "Error, there is no such type to be passed into post-list!";
+            $title = "No result!";
             array_push($errors, "Error, there is no such type to be passed into post-list!");
         }
         include('errors.php');
-   ?>
+    ?>
     <head>
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/global.css" />
-        <script src="components/post-item.js"></script>
     </head>
     <body>
         <?php include "components/header.php" ?>
@@ -107,20 +106,19 @@
                     <?php echo $title ?>
                 </div>
                 <?php
-                    foreach($posts as $item){
-                        echo '
-                            <post-item
-                                href="post-details.php?id='.$item[0].'" 
-                                title="'.$item[1].'" 
-                                likes="'.$item[2].'" 
-                                comments="'.$item[3].'" 
-                                author="'.$item[4].'" 
-                                createdAt="'.$item[5].'" 
-                                pinned="'.$item[6].'" />';
-                    }
-                    // if(count($posts) == 0) {
-                    //     echo "There is no result.";
-                    // }
+                    if (count($posts) === 0)
+                        include 'components/placeholder.php';
+                    else
+                        foreach($posts as $item){
+                            $post_item_id = $item[0];
+                            $post_item_href = "post-details.php?id=".$item[0];
+                            $post_item_title = $item[1];
+                            $post_item_noOfLikes = $item[2];
+                            $post_item_noOfComments = $item[3];
+                            $post_item_author = $item[4];
+                            $post_item_createdAt = $item[5];
+                            include "components/post-item.php";
+                        }
                 ?>
             </div>
         </div>

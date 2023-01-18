@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Edit Profile</title>
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/header.css" />
+    <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
 </head>
 <body class="edit-profile-body">
 	<?php 
@@ -21,7 +23,7 @@
         <form action="edit-profile.php" method="post" enctype="multipart/form-data">
             <div class="input-box">
                 <label for="username" style="font-size: 1.2em;">Username</label>
-		<input type="text" name="username" value="<?php echo $user['username'] ?>"> 
+		<input type="text" minlength="2" name="username" value="<?php echo $user['username'] ?>"> 
             </div>
             <div class="input-box">
                 <label for="email" style="font-size: 1.2em;">Email Address</label>
@@ -30,7 +32,7 @@
             <div class="input-box">
                 <label for="password1" style="font-size: 1.2em;">New Password</label>
                 <!-- placeholder will be the user's infomation -->
-                <input type="password" name="password1" placeholder="Optional">
+                <input type="password" minlength="6" name="password1" placeholder="Optional">
             </div>
             <div class="input-box">
                 <label for="password2" style="font-size: 1.2em;">Confirm New Password</label>
@@ -56,6 +58,10 @@
 <?php
 
 $errors = array();
+
+if(isset($_GET['success'])) {
+	echo '<script>alert("Successfully updated your profile!");</script>';
+}
 
 if(isset($_POST['edit'])){
 	$curr_password = $_POST['curr_password'];
@@ -110,6 +116,7 @@ if(isset($_POST['edit'])){
 		$stmt = $conn->prepare("UPDATE user SET user_pass= ?, username= ?, profile_pic_name= ? WHERE user_id=?");
 		$stmt->bind_param("sssi", $new_password, $username, $filename, $user['user_id']);
 		$stmt->execute();
+		header('location: edit-profile.php?success=true');
 	}
 }
 

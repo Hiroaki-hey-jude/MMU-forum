@@ -10,20 +10,32 @@
 </head>
 <body>
         <div class="form-container">
-                <form action="register.php" method="post">
+                <form name="form" action="register.php" method="post">
                 <img src="images/MMU-backgrou-transparent.png" class="login-register-img" alt="">
                         <h3>Register Now For the MMU Forum!</h3>
-                        <input type="text" name="username" required placeholder="enter your name">
+                        <input type="text" name="username" minlength="2" required placeholder="enter your name">
                         <input type="email" name="email" required placeholder="enter your email">
-                        <input type="password" name="password1" required placeholder="enter your password">
+                        <input type="password" name="password1" required placeholder="enter your password" pattern="[A-Za-z]{7,14}">
                         <input type="password" name="password2" required placeholder="confirm your password">
-                        <input type="submit" name="submit" class="reg-button">
+                        <input type="submit" name="submit" class="reg-button" onclick="CheckPassword(document.form.password1)">
                         <p>already have an account? <a href="login.php">login now</a></p>
+                        <p>or</p>
+                        <p><a href="home.php">continue as a guest</a></p>
                 </form>
         </div>
 </body>
+<script>
+function CheckPassword(inputtxt) 
+{ 
+        var passw=/^[A-Za-z]\w{7,14}$/;
+        if(!inputtxt.value.match(passw)) 
+        { 
+            alert('7 to 15 characters which contain only characters')
+            return false;
+        }
+}
+</script>
 </html>
-
 <?php
 
 // include this to connect to the database
@@ -59,7 +71,7 @@ if (isset($_POST['submit'])) {
                 $stmt = $conn->prepare("insert into user (username, email, user_pass) values (?,?,?)");
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
                 $stmt->execute();
-                header('location: login.php');
+                header('location: login.php?register=true');
         }
 }
 

@@ -1,9 +1,8 @@
 <?php
 
-include 'includes/conn.php';
+include 'includes/redirect.php';
+include 'components/header.php';
 $errors = array();
-session_start();
-include 'includes/session.php';
 
 $categories = array();
 $query_get_all_categories = "SELECT * FROM category;";
@@ -35,10 +34,37 @@ if (count($errors) == 0) {
 		);
 	}
 }
+
 include 'errors.php';
 
 $subcategories_clone = $subcategories;
-$subcategories =  json_encode($subcategories);
+$subcategories = json_encode($subcategories);
+
+if (isset($_POST['submit'])) {
+	$errors = array();
+	$title = $_POST['title'];
+	$image_link = $_POST['image'];
+	$description = $_POST['description'];
+	//$category_id = $_POST['category-names'];
+	$subcategory_id = $_POST['subcategory-names'];
+
+	if(empty($image_link)) {
+		$image_link = "";
+	}
+
+	if(empty($title) || empty($description) || empty($subcategory_id) || empty($title)) {
+    		array_push($errors, "Missing parameter! You must submit the post title, description, category and subcategory.");
+	}
+
+	if (count($errors) == 0) {
+		$stmt = $conn->prepare("INSERT INTO post (author_id, subcategory_id, post_name, post_description, image_name) VALUES (?,?,?,?,?)"); 
+		$stmt->bind_param("iisss", $_SESSION['user'], $subcategory_id, $title, $description, $image_link);
+		$stmt->execute();
+		echo '<script>alert("Successfully posted!")</script>';
+	}
+}
+
+include 'errors.php';
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +76,7 @@ $subcategories =  json_encode($subcategories);
     <title>Document</title>
     <link rel="stylesheet" href="css/createpost.css">
     <link rel="stylesheet" href="css/header.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
 </head>
 <body style="background-color: #dae0e6;">
 <div class="header-div"></div>
@@ -94,7 +120,7 @@ $subcategories =  json_encode($subcategories);
                         <?php
                         foreach($subcategories_clone as $subcategory){
                             echo '
-                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[1].'">'.$subcategory[1].'</option>
+                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>
                             ';
                         }    
                         ?>
@@ -132,3 +158,4 @@ $subcategories =  json_encode($subcategories);
 </script>
 
 </html>
+

@@ -79,14 +79,13 @@ $subcategories =  json_encode($subcategories);
     <title>Document</title>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/advanced-search.css">
-    <link rel="stylesheet" href="css/reset.css" />
 </head>
-<body style="background-color: #dae0e6;">
+<body>
     <div id="advanced-search-container" class="advanced-search-container">
         <form action="" method="post">
             <section class="panel">
                 <input id="block-01" type="checkbox" class="toggle">
-                <label class="Label" for="block-01">advanced search</label>
+                <label class="Label" for="block-01">Advanced search</label>
                     <div class="content">
                     <input class="advancedsearch" type="text" name="advancedsearch" required placeholder="advanced search">
                             <div class="category">

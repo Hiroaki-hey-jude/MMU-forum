@@ -1,127 +1,134 @@
 @import "theme.css";
 
 @media screen and (min-width: 850px) {
-   #advanced-search-container {
-    margin: 0 var(--right-width) 0 var(--sidebar-width);
+  #advanced-search-container {
+    margin: 0 0 0 var(--sidebar-width);
   }
 }
 
 .toggle {
-	display: none;
+  display: none;
 }
 
-.Label {		/*タイトル*/
-	padding: 1em;
-	display: block;
-	color: black;
-	background:rgb(101, 208, 101);
+.Label {
+  /*タイトル*/
+  padding: 0.5em;
+  display: block;
+  color: white;
+  background: rgb(101, 208, 101);
+  font-weight: bold;
 }
 
-.Label::before{		/*タイトル横の矢印*/
-	content:"";
-	width: 6px;
-	height: 6px;
-	border-top: 2px solid #fff;
-	border-right: 2px solid #fff;
-	-webkit-transform: rotate(45deg);
-	position: absolute;
-	top:calc( 50% - 3px );
-	right: 20px;
-	transform: rotate(135deg);
+.Label::before {
+  /*タイトル横の矢印*/
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  -webkit-transform: rotate(45deg);
+  position: absolute;
+  top: calc(50% - 3px);
+  right: 20px;
+  transform: rotate(135deg);
 }
 
 .Label,
 .content {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
-	transform: translateZ(0);
-	transition: all 0.3s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: all 0.3s;
 }
 
-.content {		/*本文*/
-	height: 0;
-	margin-bottom:10px;
-	padding:0 20px;
-	overflow: hidden;
+.content {
+  /*本文*/
+  height: 0;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  overflow: hidden;
 }
 
-.toggle:checked + .Label + .content {	/*開閉時*/
-	height: auto;
-	padding:20px ;
-	transition: all .3s;
+.toggle:checked + .Label + .content {
+  /*開閉時*/
+  height: auto;
+  padding: 20px;
+  transition: all 0.3s;
 }
 
 .toggle:checked + .Label::before {
-	transform: rotate(-45deg) !important;
+  transform: rotate(-45deg) !important;
 }
 
-.active, .accordion:hover {
-    background-color: #ccc;
+.active,
+.accordion:hover {
+  background-color: #ccc;
 }
 
 .advanced-search-container {
-    margin-top: 50px;
-    margin-left: 20%;
-    margin-right: 20%;
-    padding: 20px;
+  margin-top: 50px;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 20px;
+  padding-bottom: 0;
 }
 
 .advanced-search-container .advancedsearch {
-    padding: 5px;
-    width: 95%;
+  padding: 5px;
+  width: 95%;
 }
 
 .advanced-search-container input:focus {
-    outline:solid 2px rgb(101, 208, 101);
+  outline: solid 2px rgb(101, 208, 101);
 }
 
 .select-label {
-    display: inline-block;
-    width: 200px;
-    font-size: 1.1rem;
-    /* border: solid 1px; */
+  display: inline-block;
+  width: 200px;
+  font-size: 1.1rem;
+  /* border: solid 1px; */
 }
 .select-select {
-    display: inline-block;
-    width: 300px;
-    /* border: solid 1px; */
+  display: inline-block;
+  width: 300px;
+  /* border: solid 1px; */
 }
 
 .select-select:focus {
-    outline:solid 2px rgb(101, 208, 101);
+  outline: solid 2px rgb(101, 208, 101);
 }
 
 .category {
-    margin-top: 10px;
-    margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .subcategory {
-    margin-top: 10px;
-    margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .checkbox {
-    display: flex;
+  display: flex;
 }
 
 .checkbox .select-label {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .toggle_label {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .toggle_input {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 30px;
-    height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 30px;
+  height: 20px;
 }
 
 #search_btn {
-    cursor: pointer;
+  cursor: pointer;
 }

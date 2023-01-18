@@ -138,17 +138,11 @@ include 'errors.php';
 </body>
 <script>
     let subcategoriesFromPHP = JSON.parse('<?php echo $subcategories; ?>');
-    //console.log('typeof: ' + typeof subcategoriesFromPHP);
-    for (let i = 0; i < subcategoriesFromPHP.length; i++) {
-        console.log('value: ' + subcategoriesFromPHP[i]);
-    }
     function changeSubCategory() {
         let selectedCategoryIndex = document.getElementById('category-names').value;
 
-        console.log(selectedCategoryIndex);
         for(let i = 0; i < subcategoriesFromPHP.length; i++) {
             if(selectedCategoryIndex != subcategoriesFromPHP[i][2]) {
-                console.log(subcategoriesFromPHP[i][1]);
                 document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "none";
             } else {
                 document.getElementById(subcategoriesFromPHP[i][1] + subcategoriesFromPHP[i][0]).style.display = "block";

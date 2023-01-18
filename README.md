@@ -27,16 +27,12 @@ To-do list:
 - [x] Create admin-login.php
 - [ ] Admin functions
 
-Memo:
+To-be fixed:
 
-- [x] Discussion on how to show/return success message
-	- [x] Add success message in register.php
-	- [x] Add success message in edit\_profile.php 
-	- [x] Add success message in create\_post.php 
-- [x] Create redirect.php (redirect to login.php if cookies is not presented)
-- [x] In home.php, redirect the user to profile.php instead of edit-profile.php after clicking profile buttons
 - [ ] In create-post.php, the search bar doesn't work
-- [ ] All fontawesome icons are not working.
+- [x] All fontawesome icons are not working (changed URL)
+- [ ] In post-details.php, cannot post some comments (e.g: Post comments like `'` will cause the submit button doesn't work)
+- [ ] In post-details.php, the user will be redirected to localhost after posting a comment
 
 ### Frontend
 

@@ -138,8 +138,8 @@
                         include 'components/placeholder.php';
                     else if (count($recentPosts) === 0)
                         include 'components/placeholder.php';
-                    else {
-                        foreach($recentPosts as $post)
+                    else 
+                        foreach($recentPosts as $post) {
                             $post_item_id = $post[0];
                             $post_item_type = "post";
                             $post_item_href = "post-details.php?id=".$post[0];
@@ -149,7 +149,7 @@
                             $post_item_author = $post[4];
                             include "components/post-item.php";
                         }
-                ?>
+            ?>
 
             </div>
             <div class="post-list bookmark-list">
@@ -163,7 +163,7 @@
                     else if (count($bookmarked_posts) === 0)
                         include 'components/placeholder.php';
                     else 
-                        foreach($bookmarked_posts as $post){
+                        foreach($bookmarked_posts as $post) {
                             $post_item_id = $post[0];
                             $post_item_type = "post";
                             $post_item_href = "post-details.php?id=".$post[0];

@@ -6,9 +6,6 @@ $errors = array();
 if (isset($admin)) {
     header("Location: home.php");
 }
-if (isset($_GET['register'])) {
-	echo '<script>alert("Registration completed! Please login to continue");</script>';
-}
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password']; 

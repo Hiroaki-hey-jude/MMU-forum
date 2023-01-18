@@ -26,16 +26,18 @@ To-do list:
 - [x] Create post function
 - [x] Create admin-login.php
 - [ ] Admin functions
+	- [x] Login
 	- [ ] Manage category
 	- [ ] Manage subcategory
 	- [ ] Manage post
 	- [ ] Manage user
+	
 
 To-be fixed:
 
 - [ ] In create-post.php, the search bar doesn't work
 - [x] All fontawesome icons are not working (changed URL)
-- [ ] In post-details.php, cannot post some comments (e.g: Post comments like `'` will cause the submit button doesn't work)
+- [x] In post-details.php, cannot post some comments (e.g: Post comments like `'` will cause the submit button doesn't work) (fixed using prepared statement)
 - [ ] In post-details.php, the user will be redirected to localhost after posting a comment
 
 ### Frontend

@@ -38,7 +38,7 @@
                     // stopPropagation prevents triggering parent onclick
                     if (isset($admin))
                         echo '
-                            <a href="edit-form.php?id='.$post_item_id.'" onclick="event.stopPropagation()"><span class="post-action-icon fas fa-pen"></span></a>
+                            <a href="edit-form.php?id='.$post_item_id.'&type='.$post_item_type.'" onclick="event.stopPropagation()"><span class="post-action-icon fas fa-pen"></span></a>
                             <a href="delete-post.php?id='.$post_item_id.'" onclick="event.stopPropagation()"><span class="post-action-icon fas fa-trash"></span></a>';
                     else if ($post_item_type === "post")
                         echo '<div style="color: gray; font-size: small;">'.$post_item_author.' '.$post_item_createdAt.'</div>';

@@ -6,6 +6,10 @@
   }
 }
 
+.subcategory-diplay-none {
+  display: none;
+}
+
 .toggle {
   display: none;
 }

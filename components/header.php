@@ -15,7 +15,7 @@
 
 <head>
     <link rel="stylesheet" href="css/header.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
     <script>
         function toggleNav() {
             sidebarDisplay = document.getElementById("sidebar").style.display;
@@ -29,7 +29,7 @@
     <div class="header-div"></div>
     <header class="primary-background">
         <a id="header-title" href="home.php">
-            <img id="header-image" src="//<?php echo $websiteImage; ?>" height="30px" />
+            <img id="header-image" src="images/MMU.png" height="30px" />
             <span class="header-span"></span>
             MMU Forum
         </a>
@@ -42,9 +42,9 @@
         <span style="flex: 1;"></span>
         <?php
             if (isset($user) && $user_data[2]) {
-                echo '<a class="header-user" href="edit-profile.php"><img src="'. $user_data[2] .'" class="header-user" /></a>';
+                echo '<a class="header-user" href="profile.php"><img src="'. $user_data[2] .'" class="header-user" /></a>';
             } else {
-                echo '<a class="header-user" href="edit-profile.php"><span class="fas fa-user header-user-icon"></span></a>';
+                echo '<a class="header-user" href="profile.php"><span class="fas fa-user header-user-icon"></span></a>';
             }
         ?>
         <span class="header-span"></span>

@@ -17,20 +17,26 @@ To-do list:
 	- [x] view categories
 	- [x] view sub-categories
 	- [x] view post list
-- [ ] View posts' details 	
-	- [ ] upvoting
-	- [ ] post comment
+- [x] View posts' details 	
+	- [x] upvoting
+	- [x] post comment
+	- [x] bookmark
 	- [ ] report post or comment
 	- [ ] share post (generate URL)
-- [ ] Create post function
+- [x] Create post function
+- [x] Create admin-login.php
+- [ ] Admin functions
+	- [ ] Manage category
+	- [ ] Manage subcategory
+	- [ ] Manage post
+	- [ ] Manage user
 
-Memo:
+To-be fixed:
 
-- [x] Discussion on how to show/return success message
-	- [ ] Add success message in register.php
-	- [x] Add success message in edit\_profile.php 
-- [x] Redirect to home.php in login.php (after a successful login)
-- [x] Create redirect.php (redirect to login.php if cookies is not presented)
+- [ ] In create-post.php, the search bar doesn't work
+- [x] All fontawesome icons are not working (changed URL)
+- [ ] In post-details.php, cannot post some comments (e.g: Post comments like `'` will cause the submit button doesn't work)
+- [ ] In post-details.php, the user will be redirected to localhost after posting a comment
 
 ### Frontend
 

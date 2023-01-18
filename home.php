@@ -5,6 +5,8 @@
     include 'includes/session.php';
     $errors = array();
 
+    $categories = array();
+
     $category_table_data = array();
     $query_get_all_categories = "SELECT * FROM category;";
     $category_result = mysqli_query($conn, $query_get_all_categories);
@@ -27,6 +29,9 @@
         // $query_get_bookmark = "SELECT * FROM post WHERE post_id IN (SELECT `post_id` FROM bookmark
         //         WHERE user_id = ". $user['user_id']. ");";
         // $bookmark_data = mysqli_query($conn, $query_get_bookmark);
+        if(!$bookmark_data) {
+            array_push($errors, "Cannot select bookmark from table");
+        }
     }
 
     if(!$recent_posts_result) {
@@ -37,9 +42,6 @@
     }
     if(!$category_result) {
         array_push($errors, "Cannot select category from table");
-    }
-    if(!$bookmark_data) {
-        array_push($errors, "Cannot select bookmark from table");
     }
 
     // If there is no error
@@ -85,26 +87,28 @@
         }
 
         // get all bookmark posts
-        $limit = 5;
-        $i = 0;
-        while($row = mysqli_fetch_assoc($bookmark_data)) {
-            if($i == $limit) {
-                break;
+        if(isset($user)) {
+            $limit = 5;
+            $i = 0;
+            while($row = mysqli_fetch_assoc($bookmark_data)) {
+                if($i == $limit) {
+                    break;
+                }
+                $query_to_get_author_name = "SELECT username FROM user WHERE user_id =" . $row['author_id'] . ";";
+                $author_name_data = mysqli_query($conn, $query_to_get_author_name);
+                if(mysqli_num_rows($author_name_data) == 0)  {
+                    array_push($errors, "Cannot get author name, user_id = " . $row['author_id'] . " doesn't exist in user table");
+                    break;
+                }
+                $user_row = mysqli_fetch_assoc($author_name_data);
+                $author_name = $user_row['username'];
+                $bookmarked_posts[] = array($row['post_id'], $row['post_name'],
+                            $row['number_of_likes'], $row['number_of_comments'], $author_name, true);
+                $i++;
             }
-            $query_to_get_author_name = "SELECT username FROM user WHERE user_id = " . $row['user_id'] . ";";
-            $author_name_data = mysqli_query($conn, $query_to_get_author_name);
-            if(mysqli_num_rows($author_name_data) == 0)  {
-                array_push($errors, "Cannot get author name, user_id = " . $row['author_id'] . " doesn't exist in user table");
-                break;
-            }
-            $user_row = mysqli_fetch_assoc($author_name_data);
-            $author_name = $user_row['username'];
-            $bookmarked_posts[] = array($row['post_id'], $row['post_name'],
-                        $row['number_of_likes'], $row['number_of_comments'], true);
-            $i++;
         }
     }
-    
+
     // $bookmarked_posts[] = array("p0001", "Online Week", 3, 10, "Lim", "12/12/2022", false);
     // if the user already logged in
     include 'errors.php';
@@ -133,7 +137,7 @@
                     include 'components/placeholder.php';
                 else if (count($recentPosts) === 0)
                     include 'components/placeholder.php';
-                else
+                else {
                     foreach($recentPosts as $post)
                         $post_item_id = $post[0];
                         $post_item_type = "post";
@@ -143,7 +147,9 @@
                         $post_item_noOfComments = $post[3];
                         $post_item_author = $post[4];
                         include "components/post-item.php";
+                    }
             ?>
+
         </div>
         <div class="post-list bookmark-list">
             <div class="list-title bookmark-title">
@@ -164,6 +170,7 @@
                         $post_item_noOfLikes = $post[2];
                         $post_item_noOfComments = $post[3];
                         $post_item_bookmarked = $post[4];
+                        $post_item_bookmarked = $post[5];
                         include "components/post-item.php";
                     }
             ?>

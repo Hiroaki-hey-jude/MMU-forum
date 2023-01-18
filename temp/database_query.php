@@ -29,7 +29,7 @@ $user['id'] = $_SESSION['user_id'];
     category_id INT(6) UNSIGNED NOT NULL,
     number_of_posts INT(6) NOT NULL DEFAULT 0,
     number_of_comments INT(6) NOT NULL DEFAULT 0,
-    FOREIGN KEY (category_id) REFERENCES category(category_id)
+    FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE
     );";
 
 // POST TABLE
@@ -44,8 +44,8 @@ $user['id'] = $_SESSION['user_id'];
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     number_of_comments INT(6) DEFAULT 0 NOT NULL,
     number_of_likes INT(6) DEFAULT 0 NOT NULL,
-    FOREIGN KEY (subcategory_id) REFERENCES subcategory(subcategory_id),
-    FOREIGN KEY (author_id) REFERENCES user(user_id)
+    FOREIGN KEY (subcategory_id) REFERENCES subcategory(subcategory_id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES user(user_id) ON DELETE CASCADE
     );";
 
 // COMMENT TABLE
@@ -56,8 +56,8 @@ $user['id'] = $_SESSION['user_id'];
     comment_description TEXT NOT NULL,
     comment_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     number_of_likes INT(6) NOT NULL DEFAULT 0,
-    FOREIGN KEY (commenter_id) REFERENCES user(user_id),
-    FOREIGN KEY (post_id) REFERENCES post(post_id)
+    FOREIGN KEY (commenter_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES post(post_id) ON DELETE CASCADE
     );";
 
 // LIKE TABLE
@@ -66,9 +66,9 @@ $user['id'] = $_SESSION['user_id'];
     user_id INT(6) UNSIGNED NOT NULL,
     post_id INT(6) UNSIGNED NOT NULL,
     comment_id INT(6) UNSIGNED,
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (post_id) REFERENCES post(post_id),
-    FOREIGN KEY (comment_id) REFERENCES comment(comment_id)
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES post(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (comment_id) REFERENCES comment(comment_id) ON DELETE CASCADE
 );";
 
 // BOOKMARK TABLE
@@ -76,8 +76,8 @@ $user['id'] = $_SESSION['user_id'];
     bookmark_id INT(8) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id INT(6) UNSIGNED NOT NULL,
     post_id INT(6) UNSIGNED NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (post_id) REFERENCES post(post_id)
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES post(post_id) ON DELETE CASCADE
 );";
 
 // Trigger to update number of post
@@ -214,6 +214,8 @@ AFTER INSERT ON post FOR EACH ROW
     ('Land Law', 9),
     ('Things on Court', 9);
     ";
+
+
 
 // insert new user
 "INSERT INTO user (username, email, user_pass) VALUES 

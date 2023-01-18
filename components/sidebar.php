@@ -6,11 +6,12 @@
         $options[] = array("home", "Home", "home", "home.php");
         $options[] = array("createPost", "Post", "plus", "create-post.php");
         if (isset($user)) {
-            $options[] = array("profile", "Profile", "user", "edit-profile.php");
-        } else if (isset($admin)) {
-        $options[] = array("createCategory", "Category", "plus", "create-form.php?type=category");
-        $options[] = array("createSubcategory", "Subcategory", "plus", "create-form.php?type=subcategory");
-    }
+            $options[] = array("profile", "Profile", "user", "profile.php");
+        } 
+        else if (isset($admin)) {
+            $options[] = array("createCategory", "Category", "plus", "create-form.php?type=category");
+            $options[] = array("createSubcategory", "Subcategory", "plus", "create-form.php?type=subcategory");
+        }
         else {
             $options[] = array("login", "Log in", "key", "login.php");
             $options[] = array("register", "Sign up", "plus", "register.php");
@@ -22,7 +23,7 @@
     ?>
     <head>
         <link rel="stylesheet" href="css/sidebar.css" />
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
         <script>
             window.addEventListener('resize', function(event) {
                 const curWidth = event.target.innerWidth;

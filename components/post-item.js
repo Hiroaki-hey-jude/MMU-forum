@@ -22,7 +22,7 @@ class PostItem extends HTMLElement {
     this.innerHTML = `
       <link rel="stylesheet" href="css/global.css" />
       <script src="js/moment.js"></script>
-      <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
       <div class="post-item" onclick="location.href = '${href}';">
           ${type === "post" ? bookmarked : ""}
           <p class="list-item-title">${title}</p>

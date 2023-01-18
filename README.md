@@ -24,6 +24,8 @@ To-do list:
 	- [ ] report post or comment
 	- [ ] share post (generate URL)
 - [x] Create post function
+- [x] Create admin-login.php
+- [ ] Admin functions
 
 Memo:
 
@@ -33,6 +35,8 @@ Memo:
 	- [x] Add success message in create\_post.php 
 - [x] Create redirect.php (redirect to login.php if cookies is not presented)
 - [x] In home.php, redirect the user to profile.php instead of edit-profile.php after clicking profile buttons
+- [ ] In create-post.php, the search bar doesn't work
+- [ ] All fontawesome icons are not working.
 
 ### Frontend
 

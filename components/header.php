@@ -29,7 +29,7 @@
     <div class="header-div"></div>
     <header class="primary-background">
         <a id="header-title" href="home.php">
-            <img id="header-image" src="//<?php echo $websiteImage; ?>" height="30px" />
+            <img id="header-image" src="../images/MMU.png" height="30px" />
             <span class="header-span"></span>
             MMU Forum
         </a>

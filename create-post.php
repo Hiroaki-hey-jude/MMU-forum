@@ -1,6 +1,7 @@
 <?php
 
 include 'includes/redirect.php';
+include 'components/header.php';
 $errors = array();
 
 $categories = array();

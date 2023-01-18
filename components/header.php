@@ -42,9 +42,9 @@
         <span style="flex: 1;"></span>
         <?php
             if (isset($user) && $user_data[2]) {
-                echo '<a class="header-user" href="edit-profile.php"><img src="'. $user_data[2] .'" class="header-user" /></a>';
+                echo '<a class="header-user" href="profile.php"><img src="'. $user_data[2] .'" class="header-user" /></a>';
             } else {
-                echo '<a class="header-user" href="edit-profile.php"><span class="fas fa-user header-user-icon"></span></a>';
+                echo '<a class="header-user" href="profile.php"><span class="fas fa-user header-user-icon"></span></a>';
             }
         ?>
         <span class="header-span"></span>

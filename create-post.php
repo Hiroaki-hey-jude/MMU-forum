@@ -1,10 +1,7 @@
 <?php
 
-include 'includes/conn.php';
-$errors = array();
-session_start();
-include 'includes/session.php';
 include 'includes/redirect.php';
+$errors = array();
 
 $categories = array();
 $query_get_all_categories = "SELECT * FROM category;";

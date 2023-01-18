@@ -2,10 +2,10 @@
 <html>
     <?php
         include "includes/permission.php";
+	include "includes/session.php";
         $fieldKeys = [];
         $type = $_GET["type"];
 
-	include 'includes/redirect.php';
 	$errors = array();
 	
 	$categories = array();

@@ -14881,6 +14881,28 @@ INSERT INTO `subcategory` (`subcategory_id`, `subcategory_name`, `category_id`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+	`admin_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`admin_name` varchar(255) NOT NULL,
+	`email` varchar(255) NOT NULL,
+	`admin_pass` varchar(255) NOT NULL,
+);
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `admin` (`admin_id`, `admin_name`, `email`, `admin_pass`) VALUES
+(1, 'admin1', 'admin1@admin.com', 'admin1'),
+(2, 'admin2', 'admin2@admin.com', 'admin2'),
+(3, 'admin3', 'admin3@admin.com', 'admin3');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 

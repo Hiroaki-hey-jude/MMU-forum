@@ -8,7 +8,7 @@
 			$stmt->bind_param("i", $_SESSION['admin']);
 			$stmt->execute();
 
-			$user = $stmt->get_result()->fetch_assoc();
+			$admin = $stmt->get_result()->fetch_assoc();
 		}
 		catch(PDOException $e) {
 			echo "There is some problem in connection: " . $e->getMessage();

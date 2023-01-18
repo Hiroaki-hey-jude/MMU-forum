@@ -18,6 +18,7 @@
 .sidebar-button {
   display: flex;
   align-items: center;
+  height: 3em;
 }
 
 .sidebar-button-selected,
@@ -31,13 +32,30 @@
 }
 
 .sidebar-icon {
-  margin: 1em;
   text-align: center;
-  width: 1em;
+  width: 3em;
 }
 
-@media screen and (max-width: 1000px) {
+.sidebar-search-bar {
+  display: none;
+  padding: 2px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar-search-input {
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+@media screen and (max-width: 600px) {
   .sidebar {
     display: none;
+    width: 50em;
+  }
+  .sidebar-search-bar {
+    display: block;
   }
 }

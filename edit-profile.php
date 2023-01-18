@@ -11,11 +11,7 @@
 </head>
 <body class="edit-profile-body">
 	<?php 
-        	session_start();
-		include 'includes/session.php'; 
-		if (!isset($_SESSION['user'])) {
-			header('location: login.php');
-		}
+		include 'includes/redirect.php';
 	?>
 	
     <div class="wrapper">
@@ -61,10 +57,11 @@
 
 <?php
 
-include 'includes/conn.php';
 $errors = array();
-session_start();
-include 'includes/session.php';
+
+if(isset($_GET['success'])) {
+	echo '<script>alert("Successfully updated your profile!");</script>';
+}
 
 if(isset($_POST['edit'])){
 	$curr_password = $_POST['curr_password'];
@@ -119,6 +116,7 @@ if(isset($_POST['edit'])){
 		$stmt = $conn->prepare("UPDATE user SET user_pass= ?, username= ?, profile_pic_name= ? WHERE user_id=?");
 		$stmt->bind_param("sssi", $new_password, $username, $filename, $user['user_id']);
 		$stmt->execute();
+		header('location: edit-profile.php?success=true');
 	}
 }
 

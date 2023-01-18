@@ -14,17 +14,17 @@ class PostItem extends HTMLElement {
       ? "by " + this.getAttribute("author")
       : "";
     const createdAt = this.getAttribute("createdAt") ?? "";
-    const pinned = this.getAttribute("pinned")
+    const bookmarked = this.getAttribute("bookmarked")
       ? `<span class="fas fa-bookmark" style="float: right; margin: 0.5em 0.5em 0 0;"></span>`
       : ``;
 
     const posts = this.getAttribute("posts") ?? 0;
     this.innerHTML = `
-      <link rel="stylesheet" href="../css/global.css" />
+      <link rel="stylesheet" href="css/global.css" />
       <script src="js/moment.js"></script>
       <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
       <div class="post-item" onclick="location.href = '${href}';">
-          ${type === "post" ? pinned : ""}
+          ${type === "post" ? bookmarked : ""}
           <p class="list-item-title">${title}</p>
           <div class="list-item-subtitle">
             ${

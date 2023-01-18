@@ -18,9 +18,10 @@
                         <input type="password" name="password1" required placeholder="enter your password" pattern="[A-Za-z]{7,14}">
                         <input type="password" name="password2" required placeholder="confirm your password">
                         <input type="submit" name="submit" class="reg-button" onclick="CheckPassword(document.form.password1)">
-                        <p>already have an account? <a href="login_form.php">login now</a></p>
+                        <p>already have an account? <a href="login.php">login now</a></p>
                         <p>or</p>
                         <p><a href="home.php">continue as a guest</a></p>
+
                 </form>
         </div>
 </body>
@@ -71,7 +72,7 @@ if (isset($_POST['submit'])) {
                 $stmt = $conn->prepare("insert into user (username, email, user_pass) values (?,?,?)");
                 $stmt->bind_param("sss", $username, $email, $hashed_password);
                 $stmt->execute();
-                header('location: login.php');
+                header('location: login.php?register=true');
         }
 }
 

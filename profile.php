@@ -11,7 +11,10 @@
     <title>Document</title>
 </head>
 <body class="profile-body">
-<?php include "components/header.php" ?>
+<?php
+	include 'includes/redirect.php';
+	include 'components/header.php';
+?>
 <div class="wrapper">
         <div class="profile">
         <div class="profile-image">
@@ -22,23 +25,19 @@
                 <div class="box">
                     <p class="label" style="font-size: 1.2em;">Username</p>
                     <!-- <label for="username" style="font-size: 1.2em;">Username</label> -->
-                    <!-- <p><?php echo $user['username'] ?></p> -->
-                    <p class="profile-data">Hiroaki Ueda</p>
+                    <p class="profile-data"><?php echo $user['username']; ?></p>
                 </div>
                 <div class="box">
                 <p class="label" style="font-size: 1.2em;">Email address</p>
-                    <!-- <p><?php echo $user['username'] ?></p> -->
-                    <p class="profile-data">1191302145@student.mmu.edu.my</p>
+                    <p class="profile-data"><?php echo $user['email']; ?></p>
                 </div>
                 <div class="box">
                     <p class="label" style="font-size: 1.2em;">number of posts</p>
-                    <!-- <p><?php echo $user['username'] ?></p> -->
-                    <p class="profile-data">2</p>
+                    <p class="profile-data"><?php echo $user['number_of_posts']; ?></p>
                 </div>
                 <div class="box">
                     <p class="label" style="font-size: 1.2em;">number of comments</p>
-                    <!-- <p><?php echo $user['username'] ?></p> -->
-                    <p class="profile-data">3</p>
+                    <p class="profile-data"><?php echo $user['number_of_comments']; ?></p>
                 </div>
             </div>
             <p>wanna edit profile data? <a href="edit-profile.php">edit now</a></p>

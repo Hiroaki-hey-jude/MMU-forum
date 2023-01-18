@@ -12,7 +12,6 @@
 <body class="edit-profile-body">
 	<?php 
 		include 'includes/redirect.php';
-		include "components/header.php"
 	?>
 	
     <div class="wrapper">

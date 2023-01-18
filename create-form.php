@@ -5,13 +5,49 @@
         $fieldKeys = [];
         $type = $_GET["type"];
 
-        $categories[] = array(121, "Announcement");
-        $categories[] = array(122, "FCM");
-        $categories[] = array(123, "FCI");
-        $subcategories[] = array(221, "Academic Calendar", 121);
-        $subcategories[] = array(224, "Holiday", 121);
-        $subcategories[] = array(222, "Academic Calendar FCM", 122);
-        $subcategories[] = array(223, "Academic Calendar FCI", 123);
+	include 'includes/redirect.php';
+	$errors = array();
+	
+	$categories = array();
+	$query_get_all_categories = "SELECT * FROM category;";
+	$category_result = mysqli_query($conn, $query_get_all_categories);
+	
+	if (!$category_result) {
+		array_push($errors, "Cannot select category from table");
+	}
+	
+	$subcategories = array();
+	$query_get_all_subcategories = "SELECT * FROM subcategory;";
+	$subcategory_result = mysqli_query($conn, $query_get_all_subcategories);
+	
+	if(!$subcategory_result) {
+	    array_push($errors, "Cannot select subcategory from table");
+	}
+	
+	if (count($errors) == 0) {
+		while ($row = mysqli_fetch_assoc($category_result)) {
+			$categories[] = array($row['category_id'], $row['category_name']);
+		}
+		while ($row = mysqli_fetch_assoc($subcategory_result)) {
+			$subcategories[] = array(
+					$row['subcategory_id'],
+					$row['subcategory_name'],
+					$row['category_id'],
+					$row['number_of_posts'],
+					$row['number_of_comments']
+			);
+		}
+	}
+	
+	include 'errors.php';
+
+        //$categories[] = array(121, "Announcement");
+        //$categories[] = array(122, "FCM");
+        //$categories[] = array(123, "FCI");
+        //$subcategories[] = array(221, "Academic Calendar", 121);
+        //$subcategories[] = array(224, "Holiday", 121);
+        //$subcategories[] = array(222, "Academic Calendar FCM", 122);
+        //$subcategories[] = array(223, "Academic Calendar FCI", 123);
 
         if ($type === "category") {
             $fieldKeys = array("title");

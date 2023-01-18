@@ -79,23 +79,7 @@ include 'errors.php';
     <script src="https://kit.fontawesome.com/f019d50a29.js" crossorigin="anonymous"></script>
 </head>
 <body style="background-color: #dae0e6;">
-<div class="header-div"></div>
-    <header class="primary-background">
-        <a id="header-title" href="home.php">
-            <img id="header-image" src="images/MMU.png" height="30px" />
-            <span class="header-span"></span>
-            MMU Forum
-        </a>
-        <span class="header-span"></span>
-        <span class="header-span"></span>
-        <div class="search-bar">
-            <input class="search-input" type="text" name="search" placeholder="Search for post" />
-            <!-- TODO: add search feature -->
-            <a href="#search"><span class="fas fa-search search-icon"></span></a>
-        </div>
-        <span style="flex: 1;"></span>
-        <a id="header-user" href="#user"><span class="fas fa-user user-icon"></span></a>
-    </header>
+<?php include "components/header.php" ?>
     <div class="edit-post-container">
         <div class="top-h2">
             <h2>Create a Post</h2>
@@ -127,9 +111,9 @@ include 'errors.php';
                     </select>
                 </div>
             </div>
-            <input class="title-input" type="text" name="title" required placeholder="Enter Title">
+            <input minlength="5" class="title-input" type="text" name="title" required placeholder="Enter Title">
             <input class="image-input" type="text" name="image" required placeholder="Put image link">
-            <textarea name="description" id="" cols="30" rows="20" placeholder="Enter Description"></textarea>
+            <textarea name="description" id="" cols="30" rows="20" required placeholder="Enter Description"></textarea>
             <div align="right" class="post-submit-button" id="text-area">
                 <input type="submit" id="submit_btn" name="submit">
             </div>

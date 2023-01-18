@@ -81,7 +81,7 @@ textarea {
 }
 
 textarea:focus {
-    outline:solid 2px pink;
+    outline:solid 2px cornflowerblue;
 }
 
 @media screen and (max-width: 480px) {

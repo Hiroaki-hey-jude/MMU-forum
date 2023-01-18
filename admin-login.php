@@ -50,7 +50,7 @@ include "errors.php";
 </head>
 <body>
 <div class="form-container">
-        <form action = "login.php" method="post">
+        <form action = "admin-login.php" method="post">
         <img src="images/MMU-backgrou-transparent.png" class="login-register-img" alt="">
             <h3>MMU Admin Panel</h3>
             <input type="email" name="email" required placeholder="enter your email">

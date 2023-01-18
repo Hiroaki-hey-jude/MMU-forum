@@ -19,9 +19,13 @@
     <script>
         function toggleNav() {
             sidebarDisplay = document.getElementById("sidebar").style.display;
-            sidebarDisplay === "block"
-                ? document.getElementById("sidebar").style.display = "none"
-                : document.getElementById("sidebar").style.display = "block";
+            if (sidebarDisplay === "block") {
+                document.getElementById("sidebar").style.display = "none";
+                document.getElementById("header-menu-icon").className = "fas fa-bars";
+            } else {
+                document.getElementById("sidebar").style.display = "block";
+                document.getElementById("header-menu-icon").className = "fas fa-close";
+            }
         }
     </script>
 </head>
@@ -49,7 +53,7 @@
         ?>
         <span class="header-span"></span>
         <div class="header-user-name"><?php echo $user_data[1]; ?></div>
-        <div class="header-menu" onclick="toggleNav()"><span class="fas fa-bars"></span></div>
+        <div class="header-menu" onclick="toggleNav()"><span id="header-menu-icon" class="fas fa-bars"></span></div>
     </header>
 </body>
 

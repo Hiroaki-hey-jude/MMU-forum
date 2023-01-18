@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <?php
+        include "includes/permission.php";
         $fieldKeys = [];
         $type = $_GET["type"];
 

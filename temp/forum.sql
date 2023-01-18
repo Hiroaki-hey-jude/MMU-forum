@@ -14885,10 +14885,10 @@ INSERT INTO `subcategory` (`subcategory_id`, `subcategory_name`, `category_id`, 
 --
 
 CREATE TABLE `admin` (
-	`admin_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`admin_id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`admin_name` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL,
-	`admin_pass` varchar(255) NOT NULL,
+	`admin_pass` varchar(255) NOT NULL
 );
 
 --

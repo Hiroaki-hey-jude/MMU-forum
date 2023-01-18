@@ -1,76 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-//backend data
-$categories[] = array(
-    //`category_id`, `category_name`
-    "1",
-    "GENERAL", 
-);
-$categories[] = array(
-    "2",
-    "aculty of Computing and Informatics (FCI)", 
-);
-$categories[] = array(
-    "3",
-    "Faculty of Engineering (FOE) & Faculty of Engineering & Technology (FET)", 
-);
-$categories[] = array(
-    "4",
-    "Faculty of Management (FOM) & Faculty of Business (FOB)", 
-);
-$categories[] = array(
-    "5",
-    "Faculty of Creative Multimedia (FCM)", 
-);
-$categories[] = array(
-    "6",
-    "Faculty of Applied Communication (FAC)", 
-);
-$categories[] = array(
-    "7",
-    "Fad (FED)", 
-);
 
-// $subcategories[] = array(
-//     "1", "Annoucement", "1", "18", "46"
-// );
-$subcategories[] = array(
-    //`subcategory_id`, `subcategory_name`, `category_id`, `number_of_posts`, `number_of_comments`
-    "1", "Annoucement", "1", "18", "46"
-);
-$subcategories[] = array(
-    "2", "Club Activities", "1", "16", "46"
-);
-$subcategories[] = array(
-    "3", "Feedback and Helpdesk", "1", "16", "46"
-);
-$subcategories[] = array(
-    "4", "Admission & Enrollment", "1", "22", "72"
-);
-$subcategories[] = array(
-    "5", "Hostel Discussion", "1", "15", "44"
-);
-$subcategories[] = array(
-    "6", "Computer Science in General", "2", "15", "44"
-);
-$subcategories[] = array(
-    "7", "Nanotechnology", "3", "15", "44"
-);
-$subcategories[] = array(
-    "8", "Digital Enterprise", "4", "15", "44"
-);
-$subcategories[] = array(
-    "9", "Virtual Reality", "5", "15", "44"
-);
-$subcategories[] = array(
-    "10", "Media Culture", "6", "15", "44"
-);
-$subcategories[] = array(
-    "11", "Movie Production", "7", "15", "44"
-);
-$subcategories_clone = $subcategories;
-$subcategories =  json_encode($subcategories);
+$errors = array();
+
+$categories = array();
+$subcategories = array();
+
+$query_get_categories = "SELECT * FROM category;";
+$categories_data = mysqli_query($conn, $query_get_categories);
+
+$query_get_subcategories = "SELECT * FROM subcategory;";
+$subcategories_data = mysqli_query($conn, $query_get_subcategories);
+
+if(!$categories_data) {
+    array_push($erros, "Cannot get categories");
+}
+
+if(!$subcategories_data) {
+    array_push($erros, "Cannot get subcategories");
+}
+
+if(count($errors) == 0) {
+    while($row = mysqli_fetch_assoc($categories_data)) {
+        $categories[] = array($row['category_id'], $row['category_name']);
+    }
+    while($row = mysqli_fetch_assoc($subcategories_data)) {
+        $subcategories[] = array($row['subcategory_id'], $row['subcategory_name'], $row['category_id']
+                            , $row['number_of_posts'], $row['number_of_comments']);
+    }
+    $subcategories_clone = $subcategories;
+    $subcategories =  json_encode($subcategories);
+}
+
+include "errors.php";
+
+
 ?>
 <head>
     <meta charset="UTF-8">
@@ -82,7 +47,7 @@ $subcategories =  json_encode($subcategories);
 </head>
 <body>
     <div id="advanced-search-container" class="advanced-search-container">
-        <form action="" method="post">
+        <form action="post-list.php?type=advancedsearch" method="post">
             <section class="panel">
                 <input id="block-01" type="checkbox" class="toggle">
                 <label class="Label" for="block-01">Advanced search</label>
@@ -108,18 +73,18 @@ $subcategories =  json_encode($subcategories);
                                         <?php
                                         foreach($subcategories_clone as $subcategory){
                                             echo '
-                                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[1].'">'.$subcategory[1].'</option>
+                                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>
                                             ';
                                         }    
                                         ?>
                                     </select>
                             </div>
                             <div class="checkbox">
-                                <p class="select-label" for="subcategory-names"> Post </p>
+                                <p class="select-label" for="toggle"> Post </p>
                                 <label for="toggle" class="toggle_label">title</label>
-                                <input id="toggle" class="toggle_input" type='checkbox' />
+                                <input id="toggle" class="toggle_input" name="title" value="1" type='checkbox' checked/>
                                 <label for="toggle" class="toggle_label">decscription</label>
-                                <input id="toggle" class="toggle_input" type='checkbox' />
+                                <input id="toggle" class="toggle_input" name="desc" value="1" type='checkbox' />
                             </div>
                             <div align="right" class="advanced-search-button" id="text-area">
                                 <input value="Search" type="submit" id="search_btn" name="submit">

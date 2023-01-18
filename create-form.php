@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <?php
-        include "includes/permission.php";
 	include "includes/session.php";
+        include "includes/permission.php";
         $fieldKeys = [];
         $type = $_GET["type"];
 
@@ -40,14 +40,6 @@
 	}
 	
 	include 'errors.php';
-
-        //$categories[] = array(121, "Announcement");
-        //$categories[] = array(122, "FCM");
-        //$categories[] = array(123, "FCI");
-        //$subcategories[] = array(221, "Academic Calendar", 121);
-        //$subcategories[] = array(224, "Holiday", 121);
-        //$subcategories[] = array(222, "Academic Calendar FCM", 122);
-        //$subcategories[] = array(223, "Academic Calendar FCI", 123);
 
         if ($type === "category") {
             $fieldKeys = array("title");
@@ -170,6 +162,25 @@
                         }
                     }
                 ?>
+
+		<?php
+			$errors = array();
+			if (isset($_POST['Submit']) && isset($_GET['type'])) {
+				if ($_GET['type'] === "category") {
+					$new_category = $_POST['title'];
+					if(empty($new_category)) {
+						array_push($errors, "Missing parameter! You must submit the new category name.");
+					}
+					if (count($errors) == 0) {
+						$stmt = $conn->prepare("INSERT INTO category (category_name) VALUES (?)"); 
+						$stmt->bind_param("s", $new_category);
+						$stmt->execute();
+						echo '<script>alert("Successfully added the category!")</script>';
+					}
+				}
+			}
+			include 'errors.php';
+		?>
                 <div class="form-submit-container">
                     <input class="form-submit-button" type="submit" name="Submit" />
                 </div>
@@ -177,3 +188,4 @@
         </div>
     </body>
 </html>
+

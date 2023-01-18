@@ -116,11 +116,11 @@ include 'errors.php';
                 </div>
                 <div class="subcategory">
                     <select name="subcategory-names" id="subcategory-names" style="width:200px;">
-                        <option value="" disabled selected>Select your Subcategory</option>
+                        <option id="subcategory-display" value="" disabled selected></option>
                         <?php
                         foreach($subcategories_clone as $subcategory){
                             echo '
-                            <option id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>
+                            <option class="subcategory-diplay-none" id="'.$subcategory[1].$subcategory[0].'" value="'.$subcategory[0].'">'.$subcategory[1].'</option>
                             ';
                         }    
                         ?>
@@ -140,6 +140,8 @@ include 'errors.php';
     let subcategoriesFromPHP = JSON.parse('<?php echo $subcategories; ?>');
     function changeSubCategory() {
         let selectedCategoryIndex = document.getElementById('category-names').value;
+        var changeSubategoryDisplay = document.getElementById('subcategory-display');
+        changeSubategoryDisplay.innerHTML = "<option id='subcategory-display' value='' disabled selected>Select your Subcategory</option>";
 
         for(let i = 0; i < subcategoriesFromPHP.length; i++) {
             if(selectedCategoryIndex != subcategoriesFromPHP[i][2]) {

@@ -9,6 +9,7 @@
             $options[] = array("profile", "Profile", "user", "profile.php");
         } 
         else if (isset($admin)) {
+            var_dump('dddd');
             $options[] = array("createCategory", "Category", "plus", "create-form.php?type=category");
             $options[] = array("createSubcategory", "Subcategory", "plus", "create-form.php?type=subcategory");
         }
@@ -37,28 +38,33 @@
         </script>
     </head>
     <body>
-    <nav class="sidebar" id="sidebar">
+    <div class="sidebar" id="sidebar">
         <form id="sidebar-search-bar-form" class="sidebar-search-bar" action="post-list.php">
             <input class="sidebar-search-input" type="text" name="search" placeholder="Search for post"/>
         </form>
+        <ul>
         <?php
             foreach ($options as $option) {
                 echo '
+                <li>
                 <a href="'.$option[3].'">
                     <div class="sidebar-button';
 
-                if (str_contains($page_uri, $option[3]))
-                    echo ' sidebar-button-selected ';
-                if ($option[0] == "logout" || $option[0] == "login" || $option[0] == "register")
-                    echo ' logout-button';
+                // if (str_contains($page_uri, $option[3]))
+                //     echo ' sidebar-button-selected ';
+                // if ($option[0] == "logout" || $option[0] == "login" || $option[0] == "register")
+                //     echo ' logout-button';
                 
                 echo '">
                         <span class="sidebar-icon fas fa-'.$option[2].'"></span>
                         <div>'.$option[1].'</div>
                     </div>
-                </a>';
+                </a>
+                </li>
+                ';
             }
         ?>
-    </nav>
+        </ul>
+    </div>
     </body>
 </html>
